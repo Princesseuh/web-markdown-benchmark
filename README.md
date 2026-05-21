@@ -76,4 +76,57 @@ _Node v26.1.0, 2026-05-21._
 
 </details>
 
+### CI · GitHub Actions
+
+_Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz, Node v24.15.0, 2026-05-21._
+
+#### Markdown → HTML
+
+![Markdown to HTML benchmark](./bench/charts/ci-github-actions/markdown-to-html.svg)
+
+<details>
+<summary>Raw numbers</summary>
+
+| Parser      | simple<br>(5000×, ms) | medium<br>(5000×, ms) | GFM<br>(5000×, ms) | large 50×<br>(100×, ms) |
+| ----------- | --------------------: | --------------------: | -----------------: | ----------------------: |
+| satteri     |                    73 |                   621 |              1,303 |                     684 |
+| markdown-it |                   162 |                 1,564 |              2,151 |                   1,691 |
+| marked      |                   170 |                 2,394 |              3,060 |                   3,240 |
+| comark      |                   453 |                 4,510 |              9,998 |                   4,740 |
+| remark      |                 2,482 |                35,920 |             59,155 |                  47,754 |
+
+</details>
+
+#### Markdown → HTML with plugins
+
+![Markdown plugins benchmark](./bench/charts/ci-github-actions/markdown-plugins.svg)
+
+<details>
+<summary>Raw numbers</summary>
+
+| Scenario                                     | satteri (ms) | remark (ms) |
+| -------------------------------------------- | -----------: | ----------: |
+| MDAST plugin (heading depth + 1)             |          895 |      37,328 |
+| MDAST + unfiltered HAST plugins (worst case) |        7,914 |      39,566 |
+
+</details>
+
+#### MDX → JS
+
+![MDX to JS benchmark](./bench/charts/ci-github-actions/mdx-to-js.svg)
+
+<details>
+<summary>Raw numbers</summary>
+
+| Scenario                                            | Renders | satteri (ms) | @mdx-js/mdx (ms) |
+| --------------------------------------------------- | ------: | -----------: | ---------------: |
+| MDX → JS                                            |   5000× |          660 |           20,477 |
+| MDX + MDAST plugin (heading depth + 1)              |   5000× |          976 |           20,747 |
+| MDX + HAST plugin (count elements + uppercase text) |   5000× |        3,632 |           21,678 |
+| MDX + both MDAST & HAST plugins                     |   5000× |        4,624 |           22,250 |
+| large MDX → JS (50× document)                       |    100× |          422 |           20,778 |
+| large MDX + both plugins (50× document)             |    100× |        4,030 |           23,339 |
+
+</details>
+
 <!-- bench:end -->
