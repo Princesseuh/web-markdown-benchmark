@@ -17,8 +17,6 @@ import type { Root as HastRoot } from "hast";
 import { deeper } from "./heading-depth.ts";
 import { satteriFeatures } from "./parity.ts";
 
-// --- Sätteri plugins ---
-
 export const satteriHeadingPlugin = defineMdastPlugin({
   name: "heading-transform",
   heading(node, ctx) {
@@ -56,8 +54,6 @@ export const satteriHastAllPlugin = defineHastPlugin({
   },
 });
 
-// --- remark / rehype plugins: the same transforms expressed for unified ---
-
 export const remarkHeadingPlugin = () => (tree: MdastRoot) => {
   visit(tree, "heading", (node) => {
     node.depth = deeper[node.depth];
@@ -81,8 +77,6 @@ export const remarkHastAllPlugin = () => (tree: HastRoot) => {
     }
   });
 };
-
-// --- Composed markdown → HTML scenarios (Sätteri vs remark) ---
 
 export interface MarkdownPluginScenario {
   name: string;

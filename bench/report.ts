@@ -6,12 +6,18 @@
 // safe for CI to run and commit the diff.
 //
 //   nr bench:report                measure this machine, upsert it, rebuild
-//   nr bench:report --env "CI"     store results under a fixed label — use
-//                                  this in CI, since runner hardware varies
+//   nr bench:report --env "CI"     store results under a fixed label (use
+//                                  this in CI, since runner hardware varies)
 //   nr bench:report --reuse        skip measuring, rebuild charts + README
 //                                  from the existing results.json
 //   nr bench:report --dry-run      measure and print a summary, write nothing
-import { writeFileSync, readFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
+import {
+	writeFileSync,
+	readFileSync,
+	mkdirSync,
+	rmSync,
+	existsSync,
+} from "node:fs";
 import { cpus } from "node:os";
 import { runAllBenchmarks, type BenchResult } from "./utils/measure.ts";
 import { renderChart, type ChartPanel } from "./utils/svg.ts";
@@ -42,7 +48,7 @@ const resultsUrl = new URL("results.json", import.meta.url);
 const chartsRoot = new URL("charts/", import.meta.url);
 const readmeUrl = new URL("../README.md", import.meta.url);
 
-// Benchmarked libraries, in display order. Versions are pinned by pnpm-lock.yaml.
+// In display order.
 const benchmarkedPackages = [
 	"satteri",
 	"remark",
@@ -97,7 +103,9 @@ for (const env of Object.values(file.environments)) {
 }
 
 if (!reuse) {
-	const cpu = cpus()[0].model.replace(/\s+\d+-Core Processor$/, "").trim();
+	const cpu = cpus()[0]
+		.model.replace(/\s+\d+-Core Processor$/, "")
+		.trim();
 	const label = envFlag ?? cpu;
 	const results = await runAllBenchmarks((message) => console.error(message));
 
@@ -127,16 +135,16 @@ if (!reuse) {
 }
 
 if (Object.keys(file.environments).length === 0) {
-	throw new Error("results.json has no environments — run without --reuse first");
+	throw new Error(
+		"results.json has no environments; run without --reuse first",
+	);
 }
 
-// Primary environment (the local machine) leads; the rest follow in order.
 const orderedLabels = [
 	file.primary,
 	...Object.keys(file.environments).filter((label) => label !== file.primary),
 ].filter((label) => label in file.environments);
 
-// --- grouping ---
 function benchmarksOf(results: BenchResult[], group: string): Benchmark[] {
 	const order: string[] = [];
 	const byBench = new Map<string, BenchResult[]>();
@@ -160,7 +168,6 @@ function benchmarksOf(results: BenchResult[], group: string): Benchmark[] {
 const msOf = (rows: BenchResult[], processor: string): number =>
 	rows.find((row) => row.processor === processor)!.ms;
 
-// --- SVG charts ---
 function panel(title: string, rows: BenchResult[]): ChartPanel {
 	return {
 		title,
@@ -191,7 +198,6 @@ function chartsFor(results: BenchResult[]): Record<string, string> {
 	};
 }
 
-// --- markdown tables ---
 const fmt = (ms: number): string => Math.round(ms).toLocaleString("en-US");
 
 type Align = "l" | "r";
@@ -234,7 +240,10 @@ function tablesFor(results: BenchResult[]): {
 
 	return {
 		mdHtml: table(
-			["Parser", ...mdHtml.map((b) => `${shortFixture[b.bench]}<br>(${b.count}×, ms)`)],
+			[
+				"Parser",
+				...mdHtml.map((b) => `${shortFixture[b.bench]}<br>(${b.count}×, ms)`),
+			],
 			["l", "r", "r", "r", "r"],
 			speedOrder.map((processor) => [
 				processor,
@@ -263,12 +272,15 @@ function tablesFor(results: BenchResult[]): {
 	};
 }
 
-// --- README section per environment ---
 const slug = (text: string): string =>
 	text
 		.toLowerCase()
 		.replace(/[^a-z0-9]+/g, "-")
 		.replace(/^-+|-+$/g, "");
+
+// Charts lead each subsection; the exact numbers sit in a collapsed block.
+const collapsed = (table: string): string =>
+	`<details>\n<summary>Raw numbers</summary>\n\n${table}\n\n</details>`;
 
 function sectionFor(label: string, env: Environment): string {
 	const dir = slug(label);
@@ -286,32 +298,32 @@ ${meta}
 
 ![Markdown to HTML benchmark](./bench/charts/${dir}/markdown-to-html.svg)
 
-${tables.mdHtml}
+${collapsed(tables.mdHtml)}
 
 #### Markdown → HTML with plugins
 
 ![Markdown plugins benchmark](./bench/charts/${dir}/markdown-plugins.svg)
 
-${tables.mdPlugin}
+${collapsed(tables.mdPlugin)}
 
 #### MDX → JS
 
 ![MDX to JS benchmark](./bench/charts/${dir}/mdx-to-js.svg)
 
-${tables.mdx}`;
+${collapsed(tables.mdx)}`;
 }
 
-// --- write SVG charts (one folder per environment) ---
 rmSync(chartsRoot, { recursive: true, force: true });
 for (const label of orderedLabels) {
 	const dir = new URL(`${slug(label)}/`, chartsRoot);
 	mkdirSync(dir, { recursive: true });
-	for (const [name, svg] of Object.entries(chartsFor(file.environments[label].results))) {
+	for (const [name, svg] of Object.entries(
+		chartsFor(file.environments[label].results),
+	)) {
 		writeFileSync(new URL(name, dir), `${svg}\n`);
 	}
 }
 
-// --- write README ---
 const primaryPackages =
 	file.environments[file.primary]?.packages ?? packageVersions;
 const versionList = benchmarkedPackages
@@ -321,13 +333,6 @@ const versionList = benchmarkedPackages
 const intro = `<!-- Generated by \`nr bench:report\`. Do not edit this section by hand. -->
 
 Wall-clock time for N consecutive renders after warmup. Lower is better.
-Regenerate with \`nr bench:report\`. (\`nr bench\` runs vitest instead, which
-reports sampled per-render means.)
-
-Markdown → HTML runs every parser with GFM + frontmatter enabled. The plugin
-benchmarks compare Sätteri against remark only; markdown-it, marked and comark
-expose token-stream plugin APIs that aren't comparable to the MDAST/HAST tree
-model. MDX → JS compares Sätteri against @mdx-js/mdx.
 
 Fixtures: [simple](./bench/fixtures/simple.md) \`0.2 KB\`, [medium](./bench/fixtures/medium.md) \`10 KB\`, [GFM](./bench/fixtures/gfm.md) \`8 KB\`, large \`≈500 KB\` (medium ×50).
 
@@ -353,7 +358,6 @@ writeFileSync(
 	`${readme.slice(0, startAt + START.length)}\n\n${block}\n\n${readme.slice(endAt)}`,
 );
 
-// --- write results.json ---
 writeFileSync(resultsUrl, `${JSON.stringify(file, null, "\t")}\n`);
 
 console.error(

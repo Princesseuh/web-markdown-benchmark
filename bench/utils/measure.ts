@@ -64,7 +64,6 @@ export async function runAllBenchmarks(
 		onProgress(`  ${processor.padEnd(12)} ${ms.toFixed(1)} ms`);
 	}
 
-	// --- Markdown → HTML ---
 	const renderers = await Promise.all(
 		markdownProcessors.map(async (processor) => ({
 			name: processor.name,
@@ -79,7 +78,6 @@ export async function runAllBenchmarks(
 		}
 	}
 
-	// --- Markdown → HTML with plugins (Sätteri vs remark) ---
 	for (const scenario of markdownPluginScenarios) {
 		onProgress(`\n${scenario.name} (${SMALL}×)`);
 		await record("md-plugin", scenario.name, "satteri", SMALL, () =>
@@ -90,7 +88,6 @@ export async function runAllBenchmarks(
 		);
 	}
 
-	// --- MDX → JS ---
 	const satteriOptions = { features: satteriFeatures };
 	const mdxBaseRemarkPlugins = [remarkFrontmatter, remarkGfm];
 
