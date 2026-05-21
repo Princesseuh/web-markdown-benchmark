@@ -1,0 +1,74 @@
+// The markdown → HTML processors under comparison.
+//
+// To add a processor: append one entry below. Each `load()` lazily imports its
+// own library, so a consumer that needs only one processor (see
+// ./measure-memory.ts) never pulls the others into memory.
+//
+// GFM + frontmatter are enabled everywhere so every processor does equivalent
+// work. markdown-it/marked/Sätteri/comark have GFM on by default; remark gets
+// GFM and frontmatter added explicitly (see ./parity.ts).
+
+import { satteriFeatures } from "./parity.ts";
+
+/** A configured markdown → HTML conversion. Sync or async depending on the library. */
+export type RenderMarkdown = (source: string) => string | Promise<string>;
+
+export interface MarkdownProcessor {
+	name: string;
+	load: () => Promise<RenderMarkdown>;
+}
+
+export const markdownProcessors: MarkdownProcessor[] = [
+	{
+		name: "satteri",
+		async load() {
+			const { markdownToHtml } = await import("satteri");
+			return (source) =>
+				markdownToHtml(source, { features: satteriFeatures }).html;
+		},
+	},
+	{
+		name: "remark",
+		async load() {
+			const { remark } = await import("remark");
+			const { default: remarkGfm } = await import("remark-gfm");
+			const { default: remarkFrontmatter } = await import("remark-frontmatter");
+			const { default: remarkRehype } = await import("remark-rehype");
+			const { default: rehypeStringify } = await import("rehype-stringify");
+			const processor = remark()
+				.use(remarkFrontmatter)
+				.use(remarkGfm)
+				.use(remarkRehype)
+				.use(rehypeStringify, {
+					characterReferences: { useNamedReferences: true },
+				});
+			return async (source) => String(await processor.process(source));
+		},
+	},
+	{
+		name: "markdown-it",
+		async load() {
+			const { default: MarkdownIt } = await import("markdown-it");
+			const md = new MarkdownIt();
+			return (source) => md.render(source);
+		},
+	},
+	{
+		name: "marked",
+		async load() {
+			const { marked } = await import("marked");
+			marked.use({ gfm: true });
+			return (source) => marked.parse(source);
+		},
+	},
+	{
+		name: "comark",
+		async load() {
+			const { createParse } = await import("comark");
+			const { render } = await import("comark/render");
+			const parse = createParse();
+			return async (source) =>
+				render(await parse(source), { format: "text/html" });
+		},
+	},
+];

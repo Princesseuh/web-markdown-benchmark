@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="758" viewBox="0 0 760 758" font-family="system-ui, sans-serif">
+<style>
+.heading{font-size:13px;font-weight:600;fill:#1f2328}
+.label{font-size:12px;fill:#1f2328}
+.value{font-size:12px;font-weight:600;fill:#1f2328}
+.track{fill:#eef1f4}
+</style>
+<rect x="0.5" y="0.5" width="759" height="757" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+<text x="20" y="33" class="heading">simple markdown → HTML (5000×)</text>
+<text x="106" y="62" class="label" text-anchor="end">satteri</text>
+<rect x="116" y="50" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="50" width="17.2" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="62" class="value">32 ms</text>
+<text x="106" y="90" class="label" text-anchor="end">markdown-it</text>
+<rect x="116" y="78" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="78" width="21.9" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="90" class="value">40 ms</text>
+<text x="106" y="118" class="label" text-anchor="end">marked</text>
+<rect x="116" y="106" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="106" width="33.7" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="118" class="value">62 ms</text>
+<text x="106" y="146" class="label" text-anchor="end">comark</text>
+<rect x="116" y="134" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="134" width="68.7" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="146" class="value">127 ms</text>
+<text x="106" y="174" class="label" text-anchor="end">remark</text>
+<rect x="116" y="162" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="162" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="174" class="value">977 ms</text>
+<text x="20" y="219" class="heading">medium markdown → HTML (5000×)</text>
+<text x="106" y="248" class="label" text-anchor="end">satteri</text>
+<rect x="116" y="236" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="236" width="8.4" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="248" class="value">243 ms</text>
+<text x="106" y="276" class="label" text-anchor="end">markdown-it</text>
+<rect x="116" y="264" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="264" width="25.8" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="276" class="value">745 ms</text>
+<text x="106" y="304" class="label" text-anchor="end">marked</text>
+<rect x="116" y="292" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="292" width="43.4" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="304" class="value">1,252 ms</text>
+<text x="106" y="332" class="label" text-anchor="end">comark</text>
+<rect x="116" y="320" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="320" width="62.0" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="332" class="value">1,791 ms</text>
+<text x="106" y="360" class="label" text-anchor="end">remark</text>
+<rect x="116" y="348" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="348" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="360" class="value">15,250 ms</text>
+<text x="20" y="405" class="heading">GFM markdown → HTML (5000×)</text>
+<text x="106" y="434" class="label" text-anchor="end">satteri</text>
+<rect x="116" y="422" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="422" width="9.5" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="434" class="value">452 ms</text>
+<text x="106" y="462" class="label" text-anchor="end">markdown-it</text>
+<rect x="116" y="450" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="450" width="18.8" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="462" class="value">893 ms</text>
+<text x="106" y="490" class="label" text-anchor="end">marked</text>
+<rect x="116" y="478" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="478" width="30.3" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="490" class="value">1,443 ms</text>
+<text x="106" y="518" class="label" text-anchor="end">comark</text>
+<rect x="116" y="506" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="506" width="89.7" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="518" class="value">4,264 ms</text>
+<text x="106" y="546" class="label" text-anchor="end">remark</text>
+<rect x="116" y="534" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="534" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="546" class="value">25,114 ms</text>
+<text x="20" y="591" class="heading">large document (50× medium) → HTML (100×)</text>
+<text x="106" y="620" class="label" text-anchor="end">satteri</text>
+<rect x="116" y="608" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="608" width="6.4" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="620" class="value">229 ms</text>
+<text x="106" y="648" class="label" text-anchor="end">markdown-it</text>
+<rect x="116" y="636" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="636" width="21.6" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="648" class="value">777 ms</text>
+<text x="106" y="676" class="label" text-anchor="end">marked</text>
+<rect x="116" y="664" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="664" width="37.1" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="676" class="value">1,333 ms</text>
+<text x="106" y="704" class="label" text-anchor="end">comark</text>
+<rect x="116" y="692" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="692" width="54.5" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="704" class="value">1,959 ms</text>
+<text x="106" y="732" class="label" text-anchor="end">remark</text>
+<rect x="116" y="720" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="720" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="732" class="value">18,973 ms</text>
+</svg>

@@ -1,0 +1,79 @@
+# Welcome to the Docs
+
+import { Card } from "./components/Card";
+import { Alert } from "./components/Alert";
+
+## Getting Started
+
+This project demonstrates various **MDX** features. It includes _formatted text_,
+[links](https://example.com), and JSX components.
+
+<Alert type="info">This is an informational alert rendered as a JSX component.</Alert>
+
+## Features
+
+- **Fast** parsing
+- _Extensible_ plugin system
+- Support for various formats
+
+### Code Examples
+
+Here is some code:
+
+```javascript
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+```
+
+And inline `code` works too.
+
+<Card title="Performance" description="Built for speed">
+  The compiler processes markdown and JSX in a **single pass**,
+  producing optimized output with minimal overhead.
+
+```js
+const result = compile(source);
+```
+
+</Card>
+
+## Blockquotes
+
+> This is a blockquote.
+> It can span multiple lines.
+>
+> > And even be nested.
+
+## Dynamic Content
+
+export const version = "2.0.0";
+
+The current version is {version}.
+
+<Card title="Installation" description={`Install v${version}`}>
+  Run `npm install` to get started.
+
+1. First ordered item
+2. Second ordered item
+3. Third ordered item
+
+</Card>
+
+## Images
+
+![Alt text](https://example.com/image.png "Title")
+
+---
+
+## Links and References
+
+Check out [this link](https://example.com) for more info.
+More text with **bold**, _italic_, and `code`.
+
+<Alert type="warning">
+  Remember to check the [migration guide](https://example.com/migrate) before upgrading.
+</Alert>
+
+That's all for now.

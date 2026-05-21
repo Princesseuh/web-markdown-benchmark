@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="218" viewBox="0 0 760 218" font-family="system-ui, sans-serif">
+<style>
+.heading{font-size:13px;font-weight:600;fill:#1f2328}
+.label{font-size:12px;fill:#1f2328}
+.value{font-size:12px;font-weight:600;fill:#1f2328}
+.track{fill:#eef1f4}
+</style>
+<rect x="0.5" y="0.5" width="759" height="217" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+<text x="20" y="33" class="heading">MDAST plugin (heading depth + 1) (5000×)</text>
+<text x="106" y="62" class="label" text-anchor="end">satteri</text>
+<rect x="116" y="50" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="50" width="9.6" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="62" class="value">322 ms</text>
+<text x="106" y="90" class="label" text-anchor="end">remark</text>
+<rect x="116" y="78" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="78" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="90" class="value">17,749 ms</text>
+<text x="20" y="135" class="heading">MDAST + unfiltered HAST plugins (worst case) (5000×)</text>
+<text x="106" y="164" class="label" text-anchor="end">satteri</text>
+<rect x="116" y="152" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="152" width="64.8" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="164" class="value">2,362 ms</text>
+<text x="106" y="192" class="label" text-anchor="end">remark</text>
+<rect x="116" y="180" width="528" height="16" rx="3" class="track"/>
+<rect x="116" y="180" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="192" class="value">19,246 ms</text>
+</svg>

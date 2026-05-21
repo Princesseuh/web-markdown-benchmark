@@ -1,0 +1,47 @@
+name: Benchmark
+
+# Re-runs the benchmark suite monthly and commits the refreshed numbers,
+# charts, and README section. Stored under the "CI · GitHub Actions"
+# environment, so a local run on other hardware keeps its own section.
+on:
+  schedule:
+    - cron: "0 4 1 * *" # 04:00 UTC on the 1st of each month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: benchmark
+  cancel-in-progress: false
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Run benchmarks and regenerate report
+        run: pnpm run bench:report -- --env "CI · GitHub Actions"
+
+      - name: Commit refreshed results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add bench/results.json bench/charts README.md
+          if git diff --staged --quiet; then
+            echo "No benchmark changes to commit."
+          else
+            git commit -m "chore(bench): refresh CI benchmark results"
+            git push
+          fi

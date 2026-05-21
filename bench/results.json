@@ -1,0 +1,272 @@
+{
+	"primary": "AMD Ryzen 7 9800X3D",
+	"environments": {
+		"AMD Ryzen 7 9800X3D": {
+			"cpu": "AMD Ryzen 7 9800X3D",
+			"node": "v26.1.0",
+			"generatedAt": "2026-05-21T13:48:02.331Z",
+			"results": [
+				{
+					"group": "md-html",
+					"bench": "simple markdown",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 31.88947300000001
+				},
+				{
+					"group": "md-html",
+					"bench": "simple markdown",
+					"processor": "remark",
+					"count": 5000,
+					"ms": 977.1305440000001
+				},
+				{
+					"group": "md-html",
+					"bench": "simple markdown",
+					"processor": "markdown-it",
+					"count": 5000,
+					"ms": 40.44113900000002
+				},
+				{
+					"group": "md-html",
+					"bench": "simple markdown",
+					"processor": "marked",
+					"count": 5000,
+					"ms": 62.36516699999993
+				},
+				{
+					"group": "md-html",
+					"bench": "simple markdown",
+					"processor": "comark",
+					"count": 5000,
+					"ms": 127.17063400000006
+				},
+				{
+					"group": "md-html",
+					"bench": "medium markdown",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 243.03365599999984
+				},
+				{
+					"group": "md-html",
+					"bench": "medium markdown",
+					"processor": "remark",
+					"count": 5000,
+					"ms": 15249.663815000002
+				},
+				{
+					"group": "md-html",
+					"bench": "medium markdown",
+					"processor": "markdown-it",
+					"count": 5000,
+					"ms": 744.6813020000009
+				},
+				{
+					"group": "md-html",
+					"bench": "medium markdown",
+					"processor": "marked",
+					"count": 5000,
+					"ms": 1252.2565480000012
+				},
+				{
+					"group": "md-html",
+					"bench": "medium markdown",
+					"processor": "comark",
+					"count": 5000,
+					"ms": 1790.9571719999985
+				},
+				{
+					"group": "md-html",
+					"bench": "GFM markdown",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 452.131308
+				},
+				{
+					"group": "md-html",
+					"bench": "GFM markdown",
+					"processor": "remark",
+					"count": 5000,
+					"ms": 25114.263903000003
+				},
+				{
+					"group": "md-html",
+					"bench": "GFM markdown",
+					"processor": "markdown-it",
+					"count": 5000,
+					"ms": 892.6684929999974
+				},
+				{
+					"group": "md-html",
+					"bench": "GFM markdown",
+					"processor": "marked",
+					"count": 5000,
+					"ms": 1443.0890470000013
+				},
+				{
+					"group": "md-html",
+					"bench": "GFM markdown",
+					"processor": "comark",
+					"count": 5000,
+					"ms": 4264.361433999999
+				},
+				{
+					"group": "md-html",
+					"bench": "large document (50× medium)",
+					"processor": "satteri",
+					"count": 100,
+					"ms": 228.73914399999921
+				},
+				{
+					"group": "md-html",
+					"bench": "large document (50× medium)",
+					"processor": "remark",
+					"count": 100,
+					"ms": 18972.615414
+				},
+				{
+					"group": "md-html",
+					"bench": "large document (50× medium)",
+					"processor": "markdown-it",
+					"count": 100,
+					"ms": 776.9319609999948
+				},
+				{
+					"group": "md-html",
+					"bench": "large document (50× medium)",
+					"processor": "marked",
+					"count": 100,
+					"ms": 1333.1493379999883
+				},
+				{
+					"group": "md-html",
+					"bench": "large document (50× medium)",
+					"processor": "comark",
+					"count": 100,
+					"ms": 1959.059911999997
+				},
+				{
+					"group": "md-plugin",
+					"bench": "MDAST plugin (heading depth + 1)",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 321.9005109999998
+				},
+				{
+					"group": "md-plugin",
+					"bench": "MDAST plugin (heading depth + 1)",
+					"processor": "remark",
+					"count": 5000,
+					"ms": 17749.03907
+				},
+				{
+					"group": "md-plugin",
+					"bench": "MDAST + unfiltered HAST plugins (worst case)",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 2362.4849419999955
+				},
+				{
+					"group": "md-plugin",
+					"bench": "MDAST + unfiltered HAST plugins (worst case)",
+					"processor": "remark",
+					"count": 5000,
+					"ms": 19245.581772000005
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX → JS",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 227.19100700000126
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX → JS",
+					"processor": "@mdx-js/mdx",
+					"count": 5000,
+					"ms": 9955.098958999995
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + MDAST plugin (heading depth + 1)",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 348.703554000007
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + MDAST plugin (heading depth + 1)",
+					"processor": "@mdx-js/mdx",
+					"count": 5000,
+					"ms": 10296.969129999983
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + HAST plugin (count elements + uppercase text)",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 1289.1141659999848
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + HAST plugin (count elements + uppercase text)",
+					"processor": "@mdx-js/mdx",
+					"count": 5000,
+					"ms": 10824.23838200001
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + both MDAST & HAST plugins",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 1559.6774319999968
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + both MDAST & HAST plugins",
+					"processor": "@mdx-js/mdx",
+					"count": 5000,
+					"ms": 11191.861942999996
+				},
+				{
+					"group": "mdx",
+					"bench": "large MDX → JS (50× document)",
+					"processor": "satteri",
+					"count": 100,
+					"ms": 197.11022100000991
+				},
+				{
+					"group": "mdx",
+					"bench": "large MDX → JS (50× document)",
+					"processor": "@mdx-js/mdx",
+					"count": 100,
+					"ms": 7817.353972000012
+				},
+				{
+					"group": "mdx",
+					"bench": "large MDX + both plugins (50× document)",
+					"processor": "satteri",
+					"count": 100,
+					"ms": 1341.3245499999903
+				},
+				{
+					"group": "mdx",
+					"bench": "large MDX + both plugins (50× document)",
+					"processor": "@mdx-js/mdx",
+					"count": 100,
+					"ms": 9340.594397999987
+				}
+			],
+			"packages": {
+				"satteri": "0.6.3",
+				"remark": "15.0.1",
+				"markdown-it": "14.1.1",
+				"marked": "18.0.4",
+				"comark": "0.3.2",
+				"@mdx-js/mdx": "3.1.1"
+			}
+		}
+	}
+}

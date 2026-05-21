@@ -1,0 +1,7 @@
+minimumReleaseAgeExclude:
+  - "@bruits/satteri-darwin-arm64@0.6.3"
+  - "@bruits/satteri-darwin-x64@0.6.3"
+  - "@bruits/satteri-linux-x64-gnu@0.6.3"
+  - "@bruits/satteri-wasm32-wasi@0.6.3"
+  - "@bruits/satteri-win32-x64-msvc@0.6.3"
+  - satteri@0.6.3
