@@ -6,16 +6,16 @@
 // tree-transform model.
 
 import { markdownToHtml, defineMdastPlugin, defineHastPlugin } from "satteri";
-import { remark } from "remark";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
-import remarkFrontmatter from "remark-frontmatter";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import { visit } from "unist-util-visit";
 import type { Root as MdastRoot } from "mdast";
 import type { Root as HastRoot } from "hast";
 import { deeper } from "./heading-depth.ts";
-import { satteriFeatures } from "./parity.ts";
+import { satteriFeatures } from "./satteri-options.ts";
 
 export const satteriHeadingPlugin = defineMdastPlugin({
   name: "heading-transform",
@@ -88,15 +88,15 @@ export interface MarkdownPluginScenario {
   remark: (source: string) => Promise<string>;
 }
 
-const remarkHeadingProcessor = remark()
-  .use(remarkFrontmatter)
+const remarkHeadingProcessor = unified()
+  .use(remarkParse)
   .use(remarkGfm)
   .use(remarkHeadingPlugin)
   .use(remarkRehype)
   .use(rehypeStringify);
 
-const remarkWorstCaseProcessor = remark()
-  .use(remarkFrontmatter)
+const remarkWorstCaseProcessor = unified()
+  .use(remarkParse)
   .use(remarkGfm)
   .use(remarkMdastAllPlugin)
   .use(remarkRehype)

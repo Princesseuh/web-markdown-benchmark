@@ -9,9 +9,9 @@ Benchmarks for the Markdown parsers commonly used in web development.
 - [Sätteri](https://github.com/bruits/satteri)
 - [markdown-it](https://github.com/markdown-it/markdown-it)
 - [marked](https://github.com/markedjs/marked)
-- [comark](https://github.com/comarkdown/comark)*
+- [comark](https://github.com/comarkdown/comark)\*
 
-\*comark generates a slightly different HTML from the other libraries, having some common additions built-in (ex: heading slugs) that cannot be disabled, and/or cosmetics differences (ex: attributes order)
+\*comark generates a slightly different HTML from the other libraries, and some of its built-in features (e.g. frontmatter) cannot be turned off.
 
 ## Results
 
@@ -40,11 +40,11 @@ _Node v26.1.0, 2026-05-22._
 
 | Parser      | simple<br>(5000×, ms) | medium<br>(5000×, ms) | GFM<br>(5000×, ms) | large 50×<br>(100×, ms) |
 | ----------- | --------------------: | --------------------: | -----------------: | ----------------------: |
-| satteri     |                    30 |                   234 |                450 |                     226 |
-| markdown-it |                    43 |                 1,056 |              1,440 |                   1,085 |
-| marked      |                    62 |                 1,221 |              1,466 |                   1,293 |
-| comark      |                   131 |                 1,702 |              4,232 |                   1,869 |
-| remark      |                   918 |                15,020 |             25,647 |                  18,752 |
+| satteri     |                    31 |                   229 |                446 |                     225 |
+| markdown-it |                    42 |                 1,038 |              1,422 |                   1,076 |
+| marked      |                    61 |                 1,189 |              1,455 |                   1,287 |
+| comark      |                   129 |                 1,735 |              4,169 |                   1,888 |
+| remark      |                   906 |                14,287 |             24,826 |                  18,101 |
 
 </details>
 
@@ -57,8 +57,8 @@ _Node v26.1.0, 2026-05-22._
 
 | Scenario                                     | satteri (ms) | remark (ms) |
 | -------------------------------------------- | -----------: | ----------: |
-| MDAST plugin (heading depth + 1)             |          311 |      16,604 |
-| MDAST + unfiltered HAST plugins (worst case) |        2,435 |      18,274 |
+| MDAST plugin (heading depth + 1)             |          313 |      16,153 |
+| MDAST + unfiltered HAST plugins (worst case) |        2,423 |      17,414 |
 
 </details>
 
@@ -71,12 +71,12 @@ _Node v26.1.0, 2026-05-22._
 
 | Scenario                                            | Renders | satteri (ms) | @mdx-js/mdx (ms) |
 | --------------------------------------------------- | ------: | -----------: | ---------------: |
-| MDX → JS                                            |   5000× |          246 |            9,549 |
-| MDX + MDAST plugin (heading depth + 1)              |   5000× |          323 |            9,845 |
-| MDX + HAST plugin (count elements + uppercase text) |   5000× |        1,212 |           10,307 |
-| MDX + both MDAST & HAST plugins                     |   5000× |        1,499 |           10,553 |
-| large MDX → JS (50× document)                       |    100× |          186 |            7,847 |
-| large MDX + both plugins (50× document)             |    100× |        1,324 |            9,335 |
+| MDX → JS                                            |   5000× |          232 |            9,176 |
+| MDX + MDAST plugin (heading depth + 1)              |   5000× |          308 |            9,439 |
+| MDX + HAST plugin (count elements + uppercase text) |   5000× |        1,156 |           10,049 |
+| MDX + both MDAST & HAST plugins                     |   5000× |        1,372 |           10,356 |
+| large MDX → JS (50× document)                       |    100× |          182 |            7,736 |
+| large MDX + both plugins (50× document)             |    100× |        1,300 |            9,186 |
 
 </details>
 
@@ -92,10 +92,10 @@ _Peak resident memory growth over 5,000 consecutive renders of the medium fixtur
 | Parser      | peak RSS (MB) |
 | ----------- | ------------: |
 | satteri     |           5.0 |
-| marked      |          28.4 |
-| markdown-it |          38.1 |
-| comark      |          70.9 |
-| remark      |         143.5 |
+| marked      |          27.5 |
+| markdown-it |          38.8 |
+| comark      |          70.1 |
+| remark      |         146.4 |
 
 </details>
 
