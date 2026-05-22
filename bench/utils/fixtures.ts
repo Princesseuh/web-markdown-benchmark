@@ -1,5 +1,5 @@
-// Markdown and MDX fixtures shared by the benchmarks, the equivalence test, and
-// the measurement scripts. Files are read once at import time.
+// Markdown and MDX fixtures shared by the benchmarks and the measurement
+// scripts. Files are read once at import time.
 
 import { readFileSync } from "node:fs";
 
@@ -39,7 +39,7 @@ function scaleMdx(source: string, count: number): string {
 export const largeMarkdown = scaleMarkdown(medium, 50);
 export const largeMdx = scaleMdx(mdx, 50);
 
-/** The fixtures swept by the markdown → HTML benchmark and the equivalence test. */
+/** The fixtures swept by the markdown → HTML benchmark. */
 export const markdownFixtures: Fixture[] = [
 	{ name: "simple markdown", source: simple },
 	{ name: "medium markdown", source: medium },

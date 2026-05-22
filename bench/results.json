@@ -4,261 +4,7 @@
 		"AMD Ryzen 7 9800X3D": {
 			"cpu": "AMD Ryzen 7 9800X3D",
 			"node": "v26.1.0",
-			"generatedAt": "2026-05-21T13:48:02.331Z",
-			"results": [
-				{
-					"group": "md-html",
-					"bench": "simple markdown",
-					"processor": "satteri",
-					"count": 5000,
-					"ms": 31.88947300000001
-				},
-				{
-					"group": "md-html",
-					"bench": "simple markdown",
-					"processor": "remark",
-					"count": 5000,
-					"ms": 977.1305440000001
-				},
-				{
-					"group": "md-html",
-					"bench": "simple markdown",
-					"processor": "markdown-it",
-					"count": 5000,
-					"ms": 40.44113900000002
-				},
-				{
-					"group": "md-html",
-					"bench": "simple markdown",
-					"processor": "marked",
-					"count": 5000,
-					"ms": 62.36516699999993
-				},
-				{
-					"group": "md-html",
-					"bench": "simple markdown",
-					"processor": "comark",
-					"count": 5000,
-					"ms": 127.17063400000006
-				},
-				{
-					"group": "md-html",
-					"bench": "medium markdown",
-					"processor": "satteri",
-					"count": 5000,
-					"ms": 243.03365599999984
-				},
-				{
-					"group": "md-html",
-					"bench": "medium markdown",
-					"processor": "remark",
-					"count": 5000,
-					"ms": 15249.663815000002
-				},
-				{
-					"group": "md-html",
-					"bench": "medium markdown",
-					"processor": "markdown-it",
-					"count": 5000,
-					"ms": 744.6813020000009
-				},
-				{
-					"group": "md-html",
-					"bench": "medium markdown",
-					"processor": "marked",
-					"count": 5000,
-					"ms": 1252.2565480000012
-				},
-				{
-					"group": "md-html",
-					"bench": "medium markdown",
-					"processor": "comark",
-					"count": 5000,
-					"ms": 1790.9571719999985
-				},
-				{
-					"group": "md-html",
-					"bench": "GFM markdown",
-					"processor": "satteri",
-					"count": 5000,
-					"ms": 452.131308
-				},
-				{
-					"group": "md-html",
-					"bench": "GFM markdown",
-					"processor": "remark",
-					"count": 5000,
-					"ms": 25114.263903000003
-				},
-				{
-					"group": "md-html",
-					"bench": "GFM markdown",
-					"processor": "markdown-it",
-					"count": 5000,
-					"ms": 892.6684929999974
-				},
-				{
-					"group": "md-html",
-					"bench": "GFM markdown",
-					"processor": "marked",
-					"count": 5000,
-					"ms": 1443.0890470000013
-				},
-				{
-					"group": "md-html",
-					"bench": "GFM markdown",
-					"processor": "comark",
-					"count": 5000,
-					"ms": 4264.361433999999
-				},
-				{
-					"group": "md-html",
-					"bench": "large document (50× medium)",
-					"processor": "satteri",
-					"count": 100,
-					"ms": 228.73914399999921
-				},
-				{
-					"group": "md-html",
-					"bench": "large document (50× medium)",
-					"processor": "remark",
-					"count": 100,
-					"ms": 18972.615414
-				},
-				{
-					"group": "md-html",
-					"bench": "large document (50× medium)",
-					"processor": "markdown-it",
-					"count": 100,
-					"ms": 776.9319609999948
-				},
-				{
-					"group": "md-html",
-					"bench": "large document (50× medium)",
-					"processor": "marked",
-					"count": 100,
-					"ms": 1333.1493379999883
-				},
-				{
-					"group": "md-html",
-					"bench": "large document (50× medium)",
-					"processor": "comark",
-					"count": 100,
-					"ms": 1959.059911999997
-				},
-				{
-					"group": "md-plugin",
-					"bench": "MDAST plugin (heading depth + 1)",
-					"processor": "satteri",
-					"count": 5000,
-					"ms": 321.9005109999998
-				},
-				{
-					"group": "md-plugin",
-					"bench": "MDAST plugin (heading depth + 1)",
-					"processor": "remark",
-					"count": 5000,
-					"ms": 17749.03907
-				},
-				{
-					"group": "md-plugin",
-					"bench": "MDAST + unfiltered HAST plugins (worst case)",
-					"processor": "satteri",
-					"count": 5000,
-					"ms": 2362.4849419999955
-				},
-				{
-					"group": "md-plugin",
-					"bench": "MDAST + unfiltered HAST plugins (worst case)",
-					"processor": "remark",
-					"count": 5000,
-					"ms": 19245.581772000005
-				},
-				{
-					"group": "mdx",
-					"bench": "MDX → JS",
-					"processor": "satteri",
-					"count": 5000,
-					"ms": 227.19100700000126
-				},
-				{
-					"group": "mdx",
-					"bench": "MDX → JS",
-					"processor": "@mdx-js/mdx",
-					"count": 5000,
-					"ms": 9955.098958999995
-				},
-				{
-					"group": "mdx",
-					"bench": "MDX + MDAST plugin (heading depth + 1)",
-					"processor": "satteri",
-					"count": 5000,
-					"ms": 348.703554000007
-				},
-				{
-					"group": "mdx",
-					"bench": "MDX + MDAST plugin (heading depth + 1)",
-					"processor": "@mdx-js/mdx",
-					"count": 5000,
-					"ms": 10296.969129999983
-				},
-				{
-					"group": "mdx",
-					"bench": "MDX + HAST plugin (count elements + uppercase text)",
-					"processor": "satteri",
-					"count": 5000,
-					"ms": 1289.1141659999848
-				},
-				{
-					"group": "mdx",
-					"bench": "MDX + HAST plugin (count elements + uppercase text)",
-					"processor": "@mdx-js/mdx",
-					"count": 5000,
-					"ms": 10824.23838200001
-				},
-				{
-					"group": "mdx",
-					"bench": "MDX + both MDAST & HAST plugins",
-					"processor": "satteri",
-					"count": 5000,
-					"ms": 1559.6774319999968
-				},
-				{
-					"group": "mdx",
-					"bench": "MDX + both MDAST & HAST plugins",
-					"processor": "@mdx-js/mdx",
-					"count": 5000,
-					"ms": 11191.861942999996
-				},
-				{
-					"group": "mdx",
-					"bench": "large MDX → JS (50× document)",
-					"processor": "satteri",
-					"count": 100,
-					"ms": 197.11022100000991
-				},
-				{
-					"group": "mdx",
-					"bench": "large MDX → JS (50× document)",
-					"processor": "@mdx-js/mdx",
-					"count": 100,
-					"ms": 7817.353972000012
-				},
-				{
-					"group": "mdx",
-					"bench": "large MDX + both plugins (50× document)",
-					"processor": "satteri",
-					"count": 100,
-					"ms": 1341.3245499999903
-				},
-				{
-					"group": "mdx",
-					"bench": "large MDX + both plugins (50× document)",
-					"processor": "@mdx-js/mdx",
-					"count": 100,
-					"ms": 9340.594397999987
-				}
-			],
+			"generatedAt": "2026-05-22T00:14:46.312Z",
 			"packages": {
 				"satteri": "0.6.3",
 				"remark": "15.0.1",
@@ -266,7 +12,288 @@
 				"marked": "18.0.4",
 				"comark": "0.3.2",
 				"@mdx-js/mdx": "3.1.1"
-			}
+			},
+			"results": [
+				{
+					"group": "md-html",
+					"bench": "simple markdown",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 30.015348999999986
+				},
+				{
+					"group": "md-html",
+					"bench": "simple markdown",
+					"processor": "remark",
+					"count": 5000,
+					"ms": 918.3699349999999
+				},
+				{
+					"group": "md-html",
+					"bench": "simple markdown",
+					"processor": "markdown-it",
+					"count": 5000,
+					"ms": 42.84629700000005
+				},
+				{
+					"group": "md-html",
+					"bench": "simple markdown",
+					"processor": "marked",
+					"count": 5000,
+					"ms": 61.87707599999999
+				},
+				{
+					"group": "md-html",
+					"bench": "simple markdown",
+					"processor": "comark",
+					"count": 5000,
+					"ms": 131.08263499999998
+				},
+				{
+					"group": "md-html",
+					"bench": "medium markdown",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 234.30742800000007
+				},
+				{
+					"group": "md-html",
+					"bench": "medium markdown",
+					"processor": "remark",
+					"count": 5000,
+					"ms": 15019.516186999997
+				},
+				{
+					"group": "md-html",
+					"bench": "medium markdown",
+					"processor": "markdown-it",
+					"count": 5000,
+					"ms": 1056.1066290000017
+				},
+				{
+					"group": "md-html",
+					"bench": "medium markdown",
+					"processor": "marked",
+					"count": 5000,
+					"ms": 1220.649129999998
+				},
+				{
+					"group": "md-html",
+					"bench": "medium markdown",
+					"processor": "comark",
+					"count": 5000,
+					"ms": 1702.2671869999976
+				},
+				{
+					"group": "md-html",
+					"bench": "GFM markdown",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 450.36269600000014
+				},
+				{
+					"group": "md-html",
+					"bench": "GFM markdown",
+					"processor": "remark",
+					"count": 5000,
+					"ms": 25646.561532
+				},
+				{
+					"group": "md-html",
+					"bench": "GFM markdown",
+					"processor": "markdown-it",
+					"count": 5000,
+					"ms": 1440.469726000003
+				},
+				{
+					"group": "md-html",
+					"bench": "GFM markdown",
+					"processor": "marked",
+					"count": 5000,
+					"ms": 1466.060175999999
+				},
+				{
+					"group": "md-html",
+					"bench": "GFM markdown",
+					"processor": "comark",
+					"count": 5000,
+					"ms": 4231.985171999993
+				},
+				{
+					"group": "md-html",
+					"bench": "large document (50× medium)",
+					"processor": "satteri",
+					"count": 100,
+					"ms": 225.84809700000187
+				},
+				{
+					"group": "md-html",
+					"bench": "large document (50× medium)",
+					"processor": "remark",
+					"count": 100,
+					"ms": 18751.77788100001
+				},
+				{
+					"group": "md-html",
+					"bench": "large document (50× medium)",
+					"processor": "markdown-it",
+					"count": 100,
+					"ms": 1085.3712610000075
+				},
+				{
+					"group": "md-html",
+					"bench": "large document (50× medium)",
+					"processor": "marked",
+					"count": 100,
+					"ms": 1292.5748069999972
+				},
+				{
+					"group": "md-html",
+					"bench": "large document (50× medium)",
+					"processor": "comark",
+					"count": 100,
+					"ms": 1868.5903580000013
+				},
+				{
+					"group": "md-plugin",
+					"bench": "MDAST plugin (heading depth + 1)",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 310.98704299998644
+				},
+				{
+					"group": "md-plugin",
+					"bench": "MDAST plugin (heading depth + 1)",
+					"processor": "remark",
+					"count": 5000,
+					"ms": 16603.634301
+				},
+				{
+					"group": "md-plugin",
+					"bench": "MDAST + unfiltered HAST plugins (worst case)",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 2435.176800999994
+				},
+				{
+					"group": "md-plugin",
+					"bench": "MDAST + unfiltered HAST plugins (worst case)",
+					"processor": "remark",
+					"count": 5000,
+					"ms": 18273.51498899999
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX → JS",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 245.80660599999828
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX → JS",
+					"processor": "@mdx-js/mdx",
+					"count": 5000,
+					"ms": 9548.619522000008
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + MDAST plugin (heading depth + 1)",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 322.7581460000074
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + MDAST plugin (heading depth + 1)",
+					"processor": "@mdx-js/mdx",
+					"count": 5000,
+					"ms": 9845.093667999987
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + HAST plugin (count elements + uppercase text)",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 1211.9608699999808
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + HAST plugin (count elements + uppercase text)",
+					"processor": "@mdx-js/mdx",
+					"count": 5000,
+					"ms": 10307.033435999998
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + both MDAST & HAST plugins",
+					"processor": "satteri",
+					"count": 5000,
+					"ms": 1498.7745550000109
+				},
+				{
+					"group": "mdx",
+					"bench": "MDX + both MDAST & HAST plugins",
+					"processor": "@mdx-js/mdx",
+					"count": 5000,
+					"ms": 10553.410302999982
+				},
+				{
+					"group": "mdx",
+					"bench": "large MDX → JS (50× document)",
+					"processor": "satteri",
+					"count": 100,
+					"ms": 185.83315600000788
+				},
+				{
+					"group": "mdx",
+					"bench": "large MDX → JS (50× document)",
+					"processor": "@mdx-js/mdx",
+					"count": 100,
+					"ms": 7847.091196000023
+				},
+				{
+					"group": "mdx",
+					"bench": "large MDX + both plugins (50× document)",
+					"processor": "satteri",
+					"count": 100,
+					"ms": 1323.6154290000268
+				},
+				{
+					"group": "mdx",
+					"bench": "large MDX + both plugins (50× document)",
+					"processor": "@mdx-js/mdx",
+					"count": 100,
+					"ms": 9335.326208999992
+				}
+			],
+			"memory": [
+				{
+					"processor": "satteri",
+					"count": 5000,
+					"peakRssKB": 5084
+				},
+				{
+					"processor": "remark",
+					"count": 5000,
+					"peakRssKB": 146916
+				},
+				{
+					"processor": "markdown-it",
+					"count": 5000,
+					"peakRssKB": 39008
+				},
+				{
+					"processor": "marked",
+					"count": 5000,
+					"peakRssKB": 29068
+				},
+				{
+					"processor": "comark",
+					"count": 5000,
+					"peakRssKB": 72556
+				}
+			]
 		},
 		"CI · GitHub Actions": {
 			"cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",

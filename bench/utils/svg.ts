@@ -15,6 +15,7 @@ export interface ChartBar {
 export interface ChartPanel {
 	title: string;
 	bars: ChartBar[];
+	unit?: "ms" | "MB";
 }
 
 const WIDTH = 760;
@@ -42,8 +43,10 @@ const COLOR = {
 const escapeXml = (text: string): string =>
 	text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-const formatValue = (value: number): string =>
-	`${Math.round(value).toLocaleString("en-US")} ms`;
+const formatValue = (value: number, unit: "ms" | "MB"): string =>
+	unit === "MB"
+		? `${value.toFixed(1)} MB`
+		: `${Math.round(value).toLocaleString("en-US")} ms`;
 
 export function renderChart(panels: ChartPanel[]): string {
 	const barX = SIDE_PAD + LEFT_GUTTER;
@@ -71,7 +74,7 @@ export function renderChart(panels: ChartPanel[]): string {
 				`<text x="${barX - 10}" y="${textY}" class="label" text-anchor="end">${escapeXml(bar.label)}</text>`,
 				`<rect x="${barX}" y="${barY}" width="${BAR_ZONE}" height="${BAR_HEIGHT}" rx="3" class="track"/>`,
 				`<rect x="${barX}" y="${barY}" width="${width.toFixed(1)}" height="${BAR_HEIGHT}" rx="3" fill="${fill}"/>`,
-				`<text x="${barX + BAR_ZONE + 8}" y="${textY}" class="value">${formatValue(bar.value)}</text>`,
+				`<text x="${barX + BAR_ZONE + 8}" y="${textY}" class="value">${formatValue(bar.value, panel.unit ?? "ms")}</text>`,
 			);
 			y += ROW_HEIGHT;
 		}

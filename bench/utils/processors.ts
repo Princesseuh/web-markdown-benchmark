@@ -4,9 +4,10 @@
 // own library, so a consumer that needs only one processor (see
 // ./measure-memory.ts) never pulls the others into memory.
 //
-// GFM + frontmatter are enabled everywhere so every processor does equivalent
-// work. markdown-it/marked/Sätteri/comark have GFM on by default; remark gets
-// GFM and frontmatter added explicitly (see ./parity.ts).
+// Every processor is configured for CommonMark + GFM so they do equivalent
+// work. marked/Sätteri/comark enable GFM by default; markdown-it needs
+// `linkify: true` for GFM bare-URL autolinking; remark gets remark-gfm added
+// explicitly (see ./parity.ts).
 
 import { satteriFeatures } from "./parity.ts";
 
@@ -39,9 +40,7 @@ export const markdownProcessors: MarkdownProcessor[] = [
 				.use(remarkFrontmatter)
 				.use(remarkGfm)
 				.use(remarkRehype)
-				.use(rehypeStringify, {
-					characterReferences: { useNamedReferences: true },
-				});
+				.use(rehypeStringify);
 			return async (source) => String(await processor.process(source));
 		},
 	},
@@ -49,7 +48,7 @@ export const markdownProcessors: MarkdownProcessor[] = [
 		name: "markdown-it",
 		async load() {
 			const { default: MarkdownIt } = await import("markdown-it");
-			const md = new MarkdownIt();
+			const md = new MarkdownIt({ linkify: true });
 			return (source) => md.render(source);
 		},
 	},

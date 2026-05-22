@@ -1,5 +1,6 @@
 // Run with: pnpm bench:memory <library>   (e.g. pnpm bench:memory satteri)
-// Measures peak RSS while parsing the large fixture (50× medium.md).
+// The report pipeline (./report.ts) also spawns this once per library.
+// Measures peak RSS while rendering the medium fixture 5000 times.
 //
 // Uses /proc/self/status VmHWM (kernel-tracked peak RSS high-water mark) so we
 // catch allocations made by native code during the parse — JS-side sampling
@@ -11,7 +12,7 @@
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { markdownProcessors } from "./utils/processors.ts";
-import { largeMarkdown } from "./utils/fixtures.ts";
+import { medium } from "./utils/fixtures.ts";
 
 const { gc } = globalThis;
 if (!gc) {
@@ -28,7 +29,7 @@ if (!processor) {
 }
 
 const render = await processor.load();
-const parse = () => render(largeMarkdown);
+const parse = () => render(medium);
 
 interface VmSample {
   rssKB: number;
@@ -63,7 +64,7 @@ writeFileSync("/proc/self/clear_refs", "5\n");
 const baseline = readVm();
 
 // N parses; lastResult keeps the final string alive at the "after" sample.
-const N = 20;
+const N = 5000;
 let lastResult: unknown = await parse();
 for (let i = 1; i < N; i++) {
   lastResult = await parse();

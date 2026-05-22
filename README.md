@@ -9,7 +9,9 @@ Benchmarks for the Markdown parsers commonly used in web development.
 - [Sätteri](https://github.com/bruits/satteri)
 - [markdown-it](https://github.com/markdown-it/markdown-it)
 - [marked](https://github.com/markedjs/marked)
-- [comark](https://github.com/comarkdown/comark)
+- [comark](https://github.com/comarkdown/comark)*
+
+\*comark generates a slightly different HTML from the other libraries, having some common additions built-in (ex: heading slugs) that cannot be disabled, and/or cosmetics differences (ex: attributes order)
 
 ## Results
 
@@ -19,13 +21,15 @@ Benchmarks for the Markdown parsers commonly used in web development.
 
 Wall-clock time for N consecutive renders after warmup. Lower is better.
 
+Every processor is configured for CommonMark + GFM. Sätteri's default `math` and `headingAttributes` extensions are turned off.
+
 Fixtures: [simple](./bench/fixtures/simple.md) `0.2 KB`, [medium](./bench/fixtures/medium.md) `10 KB`, [GFM](./bench/fixtures/gfm.md) `8 KB`, large `≈500 KB` (medium ×50).
 
 Package versions: `satteri@0.6.3`, `remark@15.0.1`, `markdown-it@14.1.1`, `marked@18.0.4`, `comark@0.3.2`, `@mdx-js/mdx@3.1.1`.
 
 ### AMD Ryzen 7 9800X3D
 
-_Node v26.1.0, 2026-05-21._
+_Node v26.1.0, 2026-05-22._
 
 #### Markdown → HTML
 
@@ -36,11 +40,11 @@ _Node v26.1.0, 2026-05-21._
 
 | Parser      | simple<br>(5000×, ms) | medium<br>(5000×, ms) | GFM<br>(5000×, ms) | large 50×<br>(100×, ms) |
 | ----------- | --------------------: | --------------------: | -----------------: | ----------------------: |
-| satteri     |                    32 |                   243 |                452 |                     229 |
-| markdown-it |                    40 |                   745 |                893 |                     777 |
-| marked      |                    62 |                 1,252 |              1,443 |                   1,333 |
-| comark      |                   127 |                 1,791 |              4,264 |                   1,959 |
-| remark      |                   977 |                15,250 |             25,114 |                  18,973 |
+| satteri     |                    30 |                   234 |                450 |                     226 |
+| markdown-it |                    43 |                 1,056 |              1,440 |                   1,085 |
+| marked      |                    62 |                 1,221 |              1,466 |                   1,293 |
+| comark      |                   131 |                 1,702 |              4,232 |                   1,869 |
+| remark      |                   918 |                15,020 |             25,647 |                  18,752 |
 
 </details>
 
@@ -53,8 +57,8 @@ _Node v26.1.0, 2026-05-21._
 
 | Scenario                                     | satteri (ms) | remark (ms) |
 | -------------------------------------------- | -----------: | ----------: |
-| MDAST plugin (heading depth + 1)             |          322 |      17,749 |
-| MDAST + unfiltered HAST plugins (worst case) |        2,362 |      19,246 |
+| MDAST plugin (heading depth + 1)             |          311 |      16,604 |
+| MDAST + unfiltered HAST plugins (worst case) |        2,435 |      18,274 |
 
 </details>
 
@@ -67,12 +71,31 @@ _Node v26.1.0, 2026-05-21._
 
 | Scenario                                            | Renders | satteri (ms) | @mdx-js/mdx (ms) |
 | --------------------------------------------------- | ------: | -----------: | ---------------: |
-| MDX → JS                                            |   5000× |          227 |            9,955 |
-| MDX + MDAST plugin (heading depth + 1)              |   5000× |          349 |           10,297 |
-| MDX + HAST plugin (count elements + uppercase text) |   5000× |        1,289 |           10,824 |
-| MDX + both MDAST & HAST plugins                     |   5000× |        1,560 |           11,192 |
-| large MDX → JS (50× document)                       |    100× |          197 |            7,817 |
-| large MDX + both plugins (50× document)             |    100× |        1,341 |            9,341 |
+| MDX → JS                                            |   5000× |          246 |            9,549 |
+| MDX + MDAST plugin (heading depth + 1)              |   5000× |          323 |            9,845 |
+| MDX + HAST plugin (count elements + uppercase text) |   5000× |        1,212 |           10,307 |
+| MDX + both MDAST & HAST plugins                     |   5000× |        1,499 |           10,553 |
+| large MDX → JS (50× document)                       |    100× |          186 |            7,847 |
+| large MDX + both plugins (50× document)             |    100× |        1,324 |            9,335 |
+
+</details>
+
+#### Memory
+
+_Peak resident memory growth over 5,000 consecutive renders of the medium fixture. Lower is better._
+
+![Memory benchmark](./bench/charts/amd-ryzen-7-9800x3d/memory.svg)
+
+<details>
+<summary>Raw numbers</summary>
+
+| Parser      | peak RSS (MB) |
+| ----------- | ------------: |
+| satteri     |           5.0 |
+| marked      |          28.4 |
+| markdown-it |          38.1 |
+| comark      |          70.9 |
+| remark      |         143.5 |
 
 </details>
 

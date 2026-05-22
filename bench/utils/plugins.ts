@@ -1,5 +1,5 @@
 // Plugin definitions for the Sätteri-vs-remark comparison, plus the composed
-// markdown → HTML scenarios shared by the benchmark and the equivalence test.
+// markdown → HTML scenarios used by the plugin benchmark.
 //
 // Only Sätteri and remark appear here: markdown-it/marked/comark have
 // token-stream plugin APIs that aren't comparable to the MDAST/HAST
@@ -40,19 +40,23 @@ export const satteriMdastAllPlugin = defineMdastPlugin({
   paragraph() {},
 });
 
-let hastCount = 0;
-export const satteriHastAllPlugin = defineHastPlugin({
-  name: "hast-touch-all",
-  element: {
-    filter: [],
-    visit(node, ctx) {
-      ctx.setProperty(node, "data-count", String(++hastCount));
+// Factory form: satteri calls it once per compile, so `count` resets per
+// document, matching remark's per-tree closure below.
+export const satteriHastAllPlugin = () => {
+  let count = 0;
+  return defineHastPlugin({
+    name: "hast-touch-all",
+    element: {
+      filter: [],
+      visit(node, ctx) {
+        ctx.setProperty(node, "data-count", String(++count));
+      },
     },
-  },
-  text(node) {
-    return { type: "text", value: node.value.toUpperCase() };
-  },
-});
+    text(node) {
+      return { type: "text", value: node.value.toUpperCase() };
+    },
+  });
+};
 
 export const remarkHeadingPlugin = () => (tree: MdastRoot) => {
   visit(tree, "heading", (node) => {
@@ -89,7 +93,7 @@ const remarkHeadingProcessor = remark()
   .use(remarkGfm)
   .use(remarkHeadingPlugin)
   .use(remarkRehype)
-  .use(rehypeStringify, { characterReferences: { useNamedReferences: true } });
+  .use(rehypeStringify);
 
 const remarkWorstCaseProcessor = remark()
   .use(remarkFrontmatter)
@@ -97,7 +101,7 @@ const remarkWorstCaseProcessor = remark()
   .use(remarkMdastAllPlugin)
   .use(remarkRehype)
   .use(remarkHastAllPlugin)
-  .use(rehypeStringify, { characterReferences: { useNamedReferences: true } });
+  .use(rehypeStringify);
 
 export const markdownPluginScenarios: MarkdownPluginScenario[] = [
   {

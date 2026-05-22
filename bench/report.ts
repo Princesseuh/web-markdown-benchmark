@@ -19,15 +19,28 @@ import {
 	existsSync,
 } from "node:fs";
 import { cpus } from "node:os";
-import { runAllBenchmarks, type BenchResult } from "./utils/measure.ts";
+import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import {
+	runAllBenchmarks,
+	type BenchResult,
+	type ProgressFn,
+} from "./utils/measure.ts";
+import { markdownProcessors } from "./utils/processors.ts";
 import { renderChart, type ChartPanel } from "./utils/svg.ts";
 
+interface MemoryResult {
+	processor: string;
+	count: number;
+	peakRssKB: number;
+}
 interface Environment {
 	cpu: string;
 	node: string;
 	generatedAt: string;
 	packages?: Record<string, string>;
 	results: BenchResult[];
+	memory?: MemoryResult[];
 }
 interface ResultsFile {
 	primary: string;
@@ -47,6 +60,7 @@ const envFlag = argv[argv.indexOf("--env") + 1];
 const resultsUrl = new URL("results.json", import.meta.url);
 const chartsRoot = new URL("charts/", import.meta.url);
 const readmeUrl = new URL("../README.md", import.meta.url);
+const measureMemoryUrl = new URL("measure-memory.ts", import.meta.url);
 
 // In display order.
 const benchmarkedPackages = [
@@ -102,12 +116,56 @@ for (const env of Object.values(file.environments)) {
 	}
 }
 
+// Memory is measured one library per subprocess: a shared process can't
+// attribute RSS to a single parser. Linux-only, since VmHWM comes from /proc.
+function measureMemory(onProgress: ProgressFn): MemoryResult[] {
+	const results: MemoryResult[] = [];
+	for (const { name } of markdownProcessors) {
+		const stdout = execFileSync(
+			process.execPath,
+			["--expose-gc", fileURLToPath(measureMemoryUrl), name],
+			{ encoding: "utf-8", stdio: ["ignore", "pipe", "inherit"] },
+		);
+		const parsed = JSON.parse(stdout) as {
+			parsesPerTrial: number;
+			peakHwmDeltaKB: number;
+		};
+		results.push({
+			processor: name,
+			count: parsed.parsesPerTrial,
+			peakRssKB: parsed.peakHwmDeltaKB,
+		});
+		onProgress(
+			`  ${name.padEnd(12)} ${(parsed.peakHwmDeltaKB / 1024).toFixed(1)} MB peak`,
+		);
+	}
+	return results;
+}
+
+// A skipped or failed run keeps whatever memory data the environment had.
+function measureMemoryFor(label: string): MemoryResult[] | undefined {
+	if (process.platform !== "linux") {
+		console.error("\nSkipping memory benchmark (requires Linux /proc).");
+		return file.environments[label]?.memory;
+	}
+	console.error("\nmemory (peak RSS)");
+	try {
+		return measureMemory((message) => console.error(message));
+	} catch (error) {
+		console.error(
+			`memory benchmark failed, keeping previous data: ${String(error)}`,
+		);
+		return file.environments[label]?.memory;
+	}
+}
+
 if (!reuse) {
 	const cpu = cpus()[0]
 		.model.replace(/\s+\d+-Core Processor$/, "")
 		.trim();
 	const label = envFlag ?? cpu;
 	const results = await runAllBenchmarks((message) => console.error(message));
+	const memory = measureMemoryFor(label);
 
 	if (dryRun) {
 		for (const benchmark of [
@@ -120,6 +178,14 @@ if (!reuse) {
 				console.log(`  ${row.processor.padEnd(12)} ${Math.round(row.ms)} ms`);
 			}
 		}
+		if (memory && memory.length > 0) {
+			console.log(`\npeak RSS (${memory[0].count}× medium)`);
+			for (const row of [...memory].sort((a, b) => a.peakRssKB - b.peakRssKB)) {
+				console.log(
+					`  ${row.processor.padEnd(12)} ${(row.peakRssKB / 1024).toFixed(1)} MB`,
+				);
+			}
+		}
 		console.log("\n--dry-run: no files written");
 		process.exit(0);
 	}
@@ -130,6 +196,7 @@ if (!reuse) {
 		generatedAt: new Date().toISOString(),
 		packages: packageVersions,
 		results,
+		memory,
 	};
 	if (!file.primary) file.primary = label;
 }
@@ -181,11 +248,25 @@ function panel(title: string, rows: BenchResult[]): ChartPanel {
 	};
 }
 
-function chartsFor(results: BenchResult[]): Record<string, string> {
-	const mdHtml = benchmarksOf(results, "md-html");
-	const mdPlugin = benchmarksOf(results, "md-plugin");
-	const mdx = benchmarksOf(results, "mdx");
+function memoryPanel(memory: MemoryResult[]): ChartPanel {
 	return {
+		title: `Peak RSS over ${memory[0].count.toLocaleString("en-US")}× medium (MB)`,
+		unit: "MB",
+		bars: [...memory]
+			.sort((a, b) => a.peakRssKB - b.peakRssKB)
+			.map((row) => ({
+				label: row.processor,
+				value: row.peakRssKB / 1024,
+				highlight: row.processor === "satteri",
+			})),
+	};
+}
+
+function chartsFor(env: Environment): Record<string, string> {
+	const mdHtml = benchmarksOf(env.results, "md-html");
+	const mdPlugin = benchmarksOf(env.results, "md-plugin");
+	const mdx = benchmarksOf(env.results, "mdx");
+	const charts: Record<string, string> = {
 		"markdown-to-html.svg": renderChart(
 			mdHtml.map((b) => panel(`${b.bench} → HTML (${b.count}×)`, b.rows)),
 		),
@@ -196,6 +277,10 @@ function chartsFor(results: BenchResult[]): Record<string, string> {
 			mdx.map((b) => panel(`${b.bench} (${b.count}×)`, b.rows)),
 		),
 	};
+	if (env.memory && env.memory.length > 0) {
+		charts["memory.svg"] = renderChart([memoryPanel(env.memory)]);
+	}
+	return charts;
 }
 
 const fmt = (ms: number): string => Math.round(ms).toLocaleString("en-US");
@@ -272,6 +357,16 @@ function tablesFor(results: BenchResult[]): {
 	};
 }
 
+function memoryTable(memory: MemoryResult[]): string {
+	return table(
+		["Parser", "peak RSS (MB)"],
+		["l", "r"],
+		[...memory]
+			.sort((a, b) => a.peakRssKB - b.peakRssKB)
+			.map((row) => [row.processor, (row.peakRssKB / 1024).toFixed(1)]),
+	);
+}
+
 const slug = (text: string): string =>
 	text
 		.toLowerCase()
@@ -290,6 +385,18 @@ function sectionFor(label: string, env: Environment): string {
 			? `_Node ${env.node}, ${date}._`
 			: `_${env.cpu}, Node ${env.node}, ${date}._`;
 	const tables = tablesFor(env.results);
+	const memoryBlock =
+		env.memory && env.memory.length > 0
+			? `
+
+#### Memory
+
+_Peak resident memory growth over ${env.memory[0].count.toLocaleString("en-US")} consecutive renders of the medium fixture. Lower is better._
+
+![Memory benchmark](./bench/charts/${dir}/memory.svg)
+
+${collapsed(memoryTable(env.memory))}`
+			: "";
 	return `### ${label}
 
 ${meta}
@@ -310,7 +417,7 @@ ${collapsed(tables.mdPlugin)}
 
 ![MDX to JS benchmark](./bench/charts/${dir}/mdx-to-js.svg)
 
-${collapsed(tables.mdx)}`;
+${collapsed(tables.mdx)}${memoryBlock}`;
 }
 
 rmSync(chartsRoot, { recursive: true, force: true });
@@ -318,7 +425,7 @@ for (const label of orderedLabels) {
 	const dir = new URL(`${slug(label)}/`, chartsRoot);
 	mkdirSync(dir, { recursive: true });
 	for (const [name, svg] of Object.entries(
-		chartsFor(file.environments[label].results),
+		chartsFor(file.environments[label]),
 	)) {
 		writeFileSync(new URL(name, dir), `${svg}\n`);
 	}
@@ -333,6 +440,8 @@ const versionList = benchmarkedPackages
 const intro = `<!-- Generated by \`nr bench:report\`. Do not edit this section by hand. -->
 
 Wall-clock time for N consecutive renders after warmup. Lower is better.
+
+Every processor is configured for CommonMark + GFM. Sätteri's default \`math\` and \`headingAttributes\` extensions are turned off.
 
 Fixtures: [simple](./bench/fixtures/simple.md) \`0.2 KB\`, [medium](./bench/fixtures/medium.md) \`10 KB\`, [GFM](./bench/fixtures/gfm.md) \`8 KB\`, large \`≈500 KB\` (medium ×50).
 
