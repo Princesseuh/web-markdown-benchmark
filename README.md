@@ -6,12 +6,14 @@ Benchmarks for the Markdown parsers commonly used in web development.
 
 - [remark + rehype](https://github.com/remarkjs/remark)
   - [@mdx-js/mdx](https://github.com/mdx-js/mdx) for MDX
-- [Sätteri](https://github.com/bruits/satteri)
+- [Sätteri](https://github.com/bruits/satteri)¹
 - [markdown-it](https://github.com/markdown-it/markdown-it)
 - [marked](https://github.com/markedjs/marked)
-- [comark](https://github.com/comarkdown/comark)\*
+- [comark](https://github.com/comarkdown/comark)²
 
-\*comark generates a slightly different HTML from the other libraries, and some of its built-in features (e.g. frontmatter) cannot be turned off.
+¹I ([Princesseuh](https://github.com/princesseuh)) am the author of Sätteri.
+
+²comark generates a slightly different HTML from the other libraries, and some of its built-in features (e.g. frontmatter) cannot be turned off.
 
 ## Results
 
