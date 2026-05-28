@@ -9,55 +9,55 @@
 <text x="20" y="33" class="heading">MDX → JS (5000×)</text>
 <text x="106" y="62" class="label" text-anchor="end">satteri</text>
 <rect x="116" y="50" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="50" width="13.4" height="16" rx="3" fill="#2f6feb"/>
+<rect x="116" y="50" width="13.3" height="16" rx="3" fill="#2f6feb"/>
 <text x="652" y="62" class="value">232 ms</text>
 <text x="106" y="90" class="label" text-anchor="end">@mdx-js/mdx</text>
 <rect x="116" y="78" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="78" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="90" class="value">9,176 ms</text>
+<text x="652" y="90" class="value">9,163 ms</text>
 <text x="20" y="135" class="heading">MDX + MDAST plugin (heading depth + 1) (5000×)</text>
 <text x="106" y="164" class="label" text-anchor="end">satteri</text>
 <rect x="116" y="152" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="152" width="17.2" height="16" rx="3" fill="#2f6feb"/>
-<text x="652" y="164" class="value">308 ms</text>
+<text x="652" y="164" class="value">306 ms</text>
 <text x="106" y="192" class="label" text-anchor="end">@mdx-js/mdx</text>
 <rect x="116" y="180" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="180" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="192" class="value">9,439 ms</text>
+<text x="652" y="192" class="value">9,394 ms</text>
 <text x="20" y="237" class="heading">MDX + HAST plugin (count elements + uppercase text) (5000×)</text>
 <text x="106" y="266" class="label" text-anchor="end">satteri</text>
 <rect x="116" y="254" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="254" width="60.7" height="16" rx="3" fill="#2f6feb"/>
-<text x="652" y="266" class="value">1,156 ms</text>
+<rect x="116" y="254" width="60.4" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="266" class="value">1,127 ms</text>
 <text x="106" y="294" class="label" text-anchor="end">@mdx-js/mdx</text>
 <rect x="116" y="282" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="282" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="294" class="value">10,049 ms</text>
+<text x="652" y="294" class="value">9,856 ms</text>
 <text x="20" y="339" class="heading">MDX + both MDAST &amp; HAST plugins (5000×)</text>
 <text x="106" y="368" class="label" text-anchor="end">satteri</text>
 <rect x="116" y="356" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="356" width="70.0" height="16" rx="3" fill="#2f6feb"/>
-<text x="652" y="368" class="value">1,372 ms</text>
+<rect x="116" y="356" width="70.8" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="368" class="value">1,361 ms</text>
 <text x="106" y="396" class="label" text-anchor="end">@mdx-js/mdx</text>
 <rect x="116" y="384" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="384" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="396" class="value">10,356 ms</text>
+<text x="652" y="396" class="value">10,148 ms</text>
 <text x="20" y="441" class="heading">large MDX → JS (50× document) (100×)</text>
 <text x="106" y="470" class="label" text-anchor="end">satteri</text>
 <rect x="116" y="458" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="458" width="12.4" height="16" rx="3" fill="#2f6feb"/>
+<rect x="116" y="458" width="12.6" height="16" rx="3" fill="#2f6feb"/>
 <text x="652" y="470" class="value">182 ms</text>
 <text x="106" y="498" class="label" text-anchor="end">@mdx-js/mdx</text>
 <rect x="116" y="486" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="486" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="498" class="value">7,736 ms</text>
+<text x="652" y="498" class="value">7,608 ms</text>
 <text x="20" y="543" class="heading">large MDX + both plugins (50× document) (100×)</text>
 <text x="106" y="572" class="label" text-anchor="end">satteri</text>
 <rect x="116" y="560" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="560" width="74.7" height="16" rx="3" fill="#2f6feb"/>
-<text x="652" y="572" class="value">1,300 ms</text>
+<text x="652" y="572" class="value">1,261 ms</text>
 <text x="106" y="600" class="label" text-anchor="end">@mdx-js/mdx</text>
 <rect x="116" y="588" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="588" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="600" class="value">9,186 ms</text>
+<text x="652" y="600" class="value">8,917 ms</text>
 </svg>

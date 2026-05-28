@@ -8,6 +8,7 @@ Benchmarks for the Markdown parsers commonly used in web development.
   - [@mdx-js/mdx](https://github.com/mdx-js/mdx) for MDX
 - [Sätteri](https://github.com/bruits/satteri)¹
 - [markdown-it](https://github.com/markdown-it/markdown-it)
+- [markdown-exit](https://github.com/serkodev/markdown-exit)
 - [marked](https://github.com/markedjs/marked)
 - [comark](https://github.com/comarkdown/comark)²
 
@@ -31,7 +32,7 @@ Package versions: `satteri@0.6.3`, `remark@15.0.1`, `markdown-it@14.1.1`, `marke
 
 ### AMD Ryzen 7 9800X3D
 
-_Node v26.1.0, 2026-05-22._
+_Node v26.2.0, 2026-05-28._
 
 #### Markdown → HTML
 
@@ -40,13 +41,14 @@ _Node v26.1.0, 2026-05-22._
 <details>
 <summary>Raw numbers</summary>
 
-| Parser      | simple<br>(5000×, ms) | medium<br>(5000×, ms) | GFM<br>(5000×, ms) | large 50×<br>(100×, ms) |
-| ----------- | --------------------: | --------------------: | -----------------: | ----------------------: |
-| satteri     |                    31 |                   229 |                446 |                     225 |
-| markdown-it |                    42 |                 1,038 |              1,422 |                   1,076 |
-| marked      |                    61 |                 1,189 |              1,455 |                   1,287 |
-| comark      |                   129 |                 1,735 |              4,169 |                   1,888 |
-| remark      |                   906 |                14,287 |             24,826 |                  18,101 |
+| Parser        | simple<br>(5000×, ms) | medium<br>(5000×, ms) | GFM<br>(5000×, ms) | large 50×<br>(100×, ms) |
+| ------------- | --------------------: | --------------------: | -----------------: | ----------------------: |
+| satteri       |                    30 |                   234 |                437 |                     222 |
+| markdown-exit |                    40 |                   918 |              1,314 |                     966 |
+| markdown-it   |                    42 |                 1,009 |              1,433 |                   1,067 |
+| marked        |                    61 |                 1,168 |              1,440 |                   1,269 |
+| comark        |                   127 |                 1,671 |              3,971 |                   1,814 |
+| remark        |                   901 |                14,268 |             24,369 |                  17,818 |
 
 </details>
 
@@ -59,8 +61,8 @@ _Node v26.1.0, 2026-05-22._
 
 | Scenario                                     | satteri (ms) | remark (ms) |
 | -------------------------------------------- | -----------: | ----------: |
-| MDAST plugin (heading depth + 1)             |          313 |      16,153 |
-| MDAST + unfiltered HAST plugins (worst case) |        2,423 |      17,414 |
+| MDAST plugin (heading depth + 1)             |          305 |      15,825 |
+| MDAST + unfiltered HAST plugins (worst case) |        2,320 |      17,206 |
 
 </details>
 
@@ -73,12 +75,12 @@ _Node v26.1.0, 2026-05-22._
 
 | Scenario                                            | Renders | satteri (ms) | @mdx-js/mdx (ms) |
 | --------------------------------------------------- | ------: | -----------: | ---------------: |
-| MDX → JS                                            |   5000× |          232 |            9,176 |
-| MDX + MDAST plugin (heading depth + 1)              |   5000× |          308 |            9,439 |
-| MDX + HAST plugin (count elements + uppercase text) |   5000× |        1,156 |           10,049 |
-| MDX + both MDAST & HAST plugins                     |   5000× |        1,372 |           10,356 |
-| large MDX → JS (50× document)                       |    100× |          182 |            7,736 |
-| large MDX + both plugins (50× document)             |    100× |        1,300 |            9,186 |
+| MDX → JS                                            |   5000× |          232 |            9,163 |
+| MDX + MDAST plugin (heading depth + 1)              |   5000× |          306 |            9,394 |
+| MDX + HAST plugin (count elements + uppercase text) |   5000× |        1,127 |            9,856 |
+| MDX + both MDAST & HAST plugins                     |   5000× |        1,361 |           10,148 |
+| large MDX → JS (50× document)                       |    100× |          182 |            7,608 |
+| large MDX + both plugins (50× document)             |    100× |        1,261 |            8,917 |
 
 </details>
 
@@ -91,13 +93,14 @@ _Peak resident memory growth over 5,000 consecutive renders of the medium fixtur
 <details>
 <summary>Raw numbers</summary>
 
-| Parser      | peak RSS (MB) |
-| ----------- | ------------: |
-| satteri     |           5.0 |
-| marked      |          27.5 |
-| markdown-it |          38.8 |
-| comark      |          70.1 |
-| remark      |         146.4 |
+| Parser        | peak RSS (MB) |
+| ------------- | ------------: |
+| satteri       |           5.0 |
+| marked        |          29.8 |
+| markdown-it   |          38.0 |
+| markdown-exit |          39.2 |
+| comark        |          70.1 |
+| remark        |         149.2 |
 
 </details>
 
@@ -174,3 +177,27 @@ _Peak resident memory growth over 5,000 consecutive renders of the medium fixtur
 </details>
 
 <!-- bench:end -->
+
+<!-- deps:start -->
+
+## Install footprint
+
+<!-- Generated by `nr bench:deps`. Do not edit this section by hand. -->
+
+Transitive dependency count and total on-disk size of each library's basic markdown → HTML pipeline, with no other extensions installed. `deps` counts packages pulled in beyond the libraries themselves; `install size` sums every file in the closure. For both stats, lower is better.
+
+| Parser          | deps | install size |
+| --------------- | ---: | -----------: |
+| `marked`        |    0 |       441 KB |
+| `markdown-exit` |    7 |       695 KB |
+| `markdown-it`   |    6 |      1.42 MB |
+| `remark`        |   59 |      2.09 MB |
+| `comark`        |   16 |      2.24 MB |
+| `satteri`       |    6 |      3.19 MB |
+| `@mdx-js/mdx`   |  111 |      4.36 MB |
+
+**Note:** Certain libraries inherently require multiple packages to provide Markdown to HTML. (ex: remark)
+
+**Note 2:** For libraries with native binaries, the install size depends on the platform. Linux binaries (what is being measured here) tends to be on the larger side.
+
+<!-- deps:end -->

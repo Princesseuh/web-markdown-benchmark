@@ -5,9 +5,9 @@
 // ./measure-memory.ts) never pulls the others into memory.
 //
 // Every processor is configured for CommonMark + GFM so they do equivalent
-// work. marked/Sätteri/comark enable GFM by default; markdown-it needs
-// `linkify: true` for GFM bare-URL autolinking; remark gets remark-gfm added
-// explicitly (see ./parity.ts).
+// work. marked/Sätteri/comark enable GFM by default; markdown-it and
+// markdown-exit need `linkify: true` for GFM bare-URL autolinking; remark
+// gets remark-gfm added explicitly (see ./parity.ts).
 
 import { satteriFeatures } from "./satteri-options.ts";
 
@@ -48,6 +48,14 @@ export const markdownProcessors: MarkdownProcessor[] = [
     async load() {
       const { default: MarkdownIt } = await import("markdown-it");
       const md = new MarkdownIt({ linkify: true });
+      return (source) => md.render(source);
+    },
+  },
+  {
+    name: "markdown-exit",
+    async load() {
+      const { createMarkdownExit } = await import("markdown-exit");
+      const md = createMarkdownExit({ linkify: true });
       return (source) => md.render(source);
     },
   },
