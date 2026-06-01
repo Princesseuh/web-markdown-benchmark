@@ -123,7 +123,7 @@ Transitive dependency count and total on-disk size of each library's basic markd
 
 ${tableText}
 
-**Note:** Certain libraries inherently require multiple packages to provide Markdown to HTML.
+**Note:** Certain libraries inherently require multiple packages to provide Markdown to HTML. (ex: remark)
 
 **Note 2:** For libraries with native binaries, the install size depends on the platform. Linux binaries (what is being measured here) tends to be on the larger side.
 
