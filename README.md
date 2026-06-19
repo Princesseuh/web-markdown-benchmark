@@ -28,11 +28,11 @@ Every processor is configured for CommonMark + GFM.
 
 Fixtures: [simple](./bench/fixtures/simple.md) `0.2 KB`, [medium](./bench/fixtures/medium.md) `10 KB`, [GFM](./bench/fixtures/gfm.md) `8 KB`, large `≈500 KB` (medium ×50).
 
-Package versions: `satteri@0.6.3`, `remark@15.0.1`, `markdown-it@14.2.0`, `marked@18.0.4`, `comark@0.3.2`, `@mdx-js/mdx@3.1.1`.
+Package versions: `satteri@0.9.0`, `remark@15.0.1`, `markdown-it@14.2.0`, `marked@18.0.5`, `comark@0.4.0`, `@mdx-js/mdx@3.1.1`.
 
 ### AMD Ryzen 7 9800X3D
 
-_Node v26.2.0, 2026-06-01._
+_Node v26.2.0, 2026-06-19._
 
 #### Markdown → HTML
 
@@ -43,12 +43,12 @@ _Node v26.2.0, 2026-06-01._
 
 | Parser        | simple<br>(5000×, ms) | medium<br>(5000×, ms) | GFM<br>(5000×, ms) | large 50×<br>(100×, ms) |
 | ------------- | --------------------: | --------------------: | -----------------: | ----------------------: |
-| satteri       |                    30 |                   231 |                433 |                     221 |
-| markdown-exit |                    38 |                   921 |              1,316 |                     974 |
-| markdown-it   |                    42 |                 1,012 |              1,422 |                   1,089 |
-| marked        |                    59 |                 1,156 |              1,450 |                   1,269 |
-| comark        |                   126 |                 1,678 |              3,943 |                   1,839 |
-| remark        |                   890 |                14,339 |             24,495 |                  17,824 |
+| satteri       |                    32 |                   237 |                449 |                     223 |
+| markdown-exit |                    39 |                   916 |              1,300 |                   1,014 |
+| markdown-it   |                    42 |                 1,005 |              1,410 |                   1,061 |
+| marked        |                    60 |                 1,158 |              1,416 |                   1,265 |
+| comark        |                   129 |                 1,687 |              3,986 |                   1,817 |
+| remark        |                   890 |                14,148 |             24,224 |                  17,666 |
 
 </details>
 
@@ -61,8 +61,8 @@ _Node v26.2.0, 2026-06-01._
 
 | Scenario                                     | satteri (ms) | remark (ms) |
 | -------------------------------------------- | -----------: | ----------: |
-| MDAST plugin (heading depth + 1)             |          307 |      16,030 |
-| MDAST + unfiltered HAST plugins (worst case) |        2,325 |      17,217 |
+| MDAST plugin (heading depth + 1)             |          287 |      15,671 |
+| MDAST + unfiltered HAST plugins (worst case) |        1,442 |      16,975 |
 
 </details>
 
@@ -75,12 +75,12 @@ _Node v26.2.0, 2026-06-01._
 
 | Scenario                                            | Renders | satteri (ms) | @mdx-js/mdx (ms) |
 | --------------------------------------------------- | ------: | -----------: | ---------------: |
-| MDX → JS                                            |   5000× |          231 |            9,165 |
-| MDX + MDAST plugin (heading depth + 1)              |   5000× |          315 |            9,483 |
-| MDX + HAST plugin (count elements + uppercase text) |   5000× |        1,143 |            9,939 |
-| MDX + both MDAST & HAST plugins                     |   5000× |        1,353 |           10,118 |
-| large MDX → JS (50× document)                       |    100× |          183 |            7,619 |
-| large MDX + both plugins (50× document)             |    100× |        1,265 |            8,988 |
+| MDX → JS                                            |   5000× |          226 |            9,009 |
+| MDX + MDAST plugin (heading depth + 1)              |   5000× |          277 |            9,248 |
+| MDX + HAST plugin (count elements + uppercase text) |   5000× |          700 |            9,737 |
+| MDX + both MDAST & HAST plugins                     |   5000× |          881 |           10,018 |
+| large MDX → JS (50× document)                       |    100× |          190 |            7,554 |
+| large MDX + both plugins (50× document)             |    100× |          782 |            8,959 |
 
 </details>
 
@@ -95,12 +95,12 @@ _Peak resident memory growth over 5,000 consecutive renders of the medium fixtur
 
 | Parser        | peak RSS (MB) |
 | ------------- | ------------: |
-| satteri       |           5.3 |
-| marked        |          29.8 |
-| markdown-it   |          37.6 |
-| markdown-exit |          39.2 |
-| comark        |          68.6 |
-| remark        |         145.2 |
+| satteri       |           6.2 |
+| marked        |          28.7 |
+| markdown-it   |          38.7 |
+| markdown-exit |          40.3 |
+| comark        |          69.3 |
+| remark        |         147.9 |
 
 </details>
 

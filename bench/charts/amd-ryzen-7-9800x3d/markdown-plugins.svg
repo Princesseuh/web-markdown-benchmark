@@ -9,19 +9,19 @@
 <text x="20" y="33" class="heading">MDAST plugin (heading depth + 1) (5000×)</text>
 <text x="106" y="62" class="label" text-anchor="end">satteri</text>
 <rect x="116" y="50" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="50" width="10.1" height="16" rx="3" fill="#2f6feb"/>
-<text x="652" y="62" class="value">307 ms</text>
+<rect x="116" y="50" width="9.7" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="62" class="value">287 ms</text>
 <text x="106" y="90" class="label" text-anchor="end">remark</text>
 <rect x="116" y="78" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="78" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="90" class="value">16,030 ms</text>
+<text x="652" y="90" class="value">15,671 ms</text>
 <text x="20" y="135" class="heading">MDAST + unfiltered HAST plugins (worst case) (5000×)</text>
 <text x="106" y="164" class="label" text-anchor="end">satteri</text>
 <rect x="116" y="152" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="152" width="71.3" height="16" rx="3" fill="#2f6feb"/>
-<text x="652" y="164" class="value">2,325 ms</text>
+<rect x="116" y="152" width="44.8" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="164" class="value">1,442 ms</text>
 <text x="106" y="192" class="label" text-anchor="end">remark</text>
 <rect x="116" y="180" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="180" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="192" class="value">17,217 ms</text>
+<text x="652" y="192" class="value">16,975 ms</text>
 </svg>
