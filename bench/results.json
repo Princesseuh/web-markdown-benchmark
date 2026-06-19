@@ -329,15 +329,15 @@
 			]
 		},
 		"CI · GitHub Actions": {
-			"cpu": "AMD EPYC 9V74",
+			"cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
 			"node": "v24.16.0",
-			"generatedAt": "2026-06-01T11:45:45.190Z",
+			"generatedAt": "2026-06-19T09:38:30.239Z",
 			"packages": {
-				"satteri": "0.6.3",
+				"satteri": "0.9.0",
 				"remark": "15.0.1",
 				"markdown-it": "14.2.0",
-				"marked": "18.0.4",
-				"comark": "0.3.2",
+				"marked": "18.0.5",
+				"comark": "0.4.0",
 				"@mdx-js/mdx": "3.1.1"
 			},
 			"results": [
@@ -346,312 +346,312 @@
 					"bench": "simple markdown",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 68.632094
+					"ms": 75.01300299999997
 				},
 				{
 					"group": "md-html",
 					"bench": "simple markdown",
 					"processor": "remark",
 					"count": 5000,
-					"ms": 2191.6767330000002
+					"ms": 2133.056821
 				},
 				{
 					"group": "md-html",
 					"bench": "simple markdown",
 					"processor": "markdown-it",
 					"count": 5000,
-					"ms": 127.847894
+					"ms": 114.40286699999979
 				},
 				{
 					"group": "md-html",
 					"bench": "simple markdown",
 					"processor": "markdown-exit",
 					"count": 5000,
-					"ms": 108.62093800000002
+					"ms": 112.29462200000034
 				},
 				{
 					"group": "md-html",
 					"bench": "simple markdown",
 					"processor": "marked",
 					"count": 5000,
-					"ms": 143.65244900000016
+					"ms": 136.30680299999995
 				},
 				{
 					"group": "md-html",
 					"bench": "simple markdown",
 					"processor": "comark",
 					"count": 5000,
-					"ms": 333.5795109999999
+					"ms": 343.91242699999975
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 585.6245690000001
+					"ms": 617.9788470000003
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "remark",
 					"count": 5000,
-					"ms": 33806.414141
+					"ms": 32223.078316
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "markdown-it",
 					"count": 5000,
-					"ms": 2750.1129409999994
+					"ms": 2688.7815420000043
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "markdown-exit",
 					"count": 5000,
-					"ms": 2480.6890090000015
+					"ms": 2436.140005000001
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "marked",
 					"count": 5000,
-					"ms": 2575.2112149999957
+					"ms": 2317.0724950000003
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "comark",
 					"count": 5000,
-					"ms": 4293.224703
+					"ms": 4270.0425840000025
 				},
 				{
 					"group": "md-html",
 					"bench": "GFM markdown",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 1074.5270420000015
+					"ms": 1340.409931999995
 				},
 				{
 					"group": "md-html",
 					"bench": "GFM markdown",
 					"processor": "remark",
 					"count": 5000,
-					"ms": 55790.384644
+					"ms": 53774.925607
 				},
 				{
 					"group": "md-html",
 					"bench": "GFM markdown",
 					"processor": "markdown-it",
 					"count": 5000,
-					"ms": 3961.7826309999946
+					"ms": 3978.769623999993
 				},
 				{
 					"group": "md-html",
 					"bench": "GFM markdown",
 					"processor": "markdown-exit",
 					"count": 5000,
-					"ms": 3608.2490629999957
+					"ms": 3570.253908999992
 				},
 				{
 					"group": "md-html",
 					"bench": "GFM markdown",
 					"processor": "marked",
 					"count": 5000,
-					"ms": 3314.9691770000063
+					"ms": 2977.8217060000025
 				},
 				{
 					"group": "md-html",
 					"bench": "GFM markdown",
 					"processor": "comark",
 					"count": 5000,
-					"ms": 9553.163864000016
+					"ms": 9602.809494999994
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "satteri",
 					"count": 100,
-					"ms": 623.5753380000242
+					"ms": 682.3282180000097
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "remark",
 					"count": 100,
-					"ms": 44568.075369
+					"ms": 40556.136318000004
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "markdown-it",
 					"count": 100,
-					"ms": 2914.022532999981
+					"ms": 2841.1763980000105
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "markdown-exit",
 					"count": 100,
-					"ms": 2554.1512370000128
+					"ms": 2566.381051000004
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "marked",
 					"count": 100,
-					"ms": 2919.1661500000046
+					"ms": 2499.061109000002
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "comark",
 					"count": 100,
-					"ms": 4834.3285719999985
+					"ms": 4394.519291999983
 				},
 				{
 					"group": "md-plugin",
 					"bench": "MDAST plugin (heading depth + 1)",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 841.4363159999775
+					"ms": 767.7553839999891
 				},
 				{
 					"group": "md-plugin",
 					"bench": "MDAST plugin (heading depth + 1)",
 					"processor": "remark",
 					"count": 5000,
-					"ms": 39047.650697000005
+					"ms": 35321.26024999999
 				},
 				{
 					"group": "md-plugin",
 					"bench": "MDAST + unfiltered HAST plugins (worst case)",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 7838.345685999986
+					"ms": 4384.571729999996
 				},
 				{
 					"group": "md-plugin",
 					"bench": "MDAST + unfiltered HAST plugins (worst case)",
 					"processor": "remark",
 					"count": 5000,
-					"ms": 39438.194703999965
+					"ms": 37411.223192000005
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX → JS",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 620.5097349999705
+					"ms": 674.3886420000345
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX → JS",
 					"processor": "@mdx-js/mdx",
 					"count": 5000,
-					"ms": 19465.914828000008
+					"ms": 18889.114836000022
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + MDAST plugin (heading depth + 1)",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 966.1870270000072
+					"ms": 834.049885000044
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + MDAST plugin (heading depth + 1)",
 					"processor": "@mdx-js/mdx",
 					"count": 5000,
-					"ms": 19918.308964000025
+					"ms": 19340.845802999975
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + HAST plugin (count elements + uppercase text)",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 3622.952585000021
+					"ms": 2104.4213020000025
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + HAST plugin (count elements + uppercase text)",
 					"processor": "@mdx-js/mdx",
 					"count": 5000,
-					"ms": 20867.702760999964
+					"ms": 20141.01719600003
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + both MDAST & HAST plugins",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 4535.293998999987
+					"ms": 2789.081800999993
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + both MDAST & HAST plugins",
 					"processor": "@mdx-js/mdx",
 					"count": 5000,
-					"ms": 21590.120406000002
+					"ms": 20808.425283999997
 				},
 				{
 					"group": "mdx",
 					"bench": "large MDX → JS (50× document)",
 					"processor": "satteri",
 					"count": 100,
-					"ms": 466.7823009999702
+					"ms": 415.91161999996984
 				},
 				{
 					"group": "mdx",
 					"bench": "large MDX → JS (50× document)",
 					"processor": "@mdx-js/mdx",
 					"count": 100,
-					"ms": 20948.70594299998
+					"ms": 17775.527378999977
 				},
 				{
 					"group": "mdx",
 					"bench": "large MDX + both plugins (50× document)",
 					"processor": "satteri",
 					"count": 100,
-					"ms": 4108.369065999985
+					"ms": 2183.3537310000393
 				},
 				{
 					"group": "mdx",
 					"bench": "large MDX + both plugins (50× document)",
 					"processor": "@mdx-js/mdx",
 					"count": 100,
-					"ms": 23288.31293200003
+					"ms": 20217.887376
 				}
 			],
 			"memory": [
 				{
 					"processor": "satteri",
 					"count": 5000,
-					"peakRssKB": 5204
+					"peakRssKB": 7020
 				},
 				{
 					"processor": "remark",
 					"count": 5000,
-					"peakRssKB": 125800
+					"peakRssKB": 125256
 				},
 				{
 					"processor": "markdown-it",
 					"count": 5000,
-					"peakRssKB": 36864
+					"peakRssKB": 37804
 				},
 				{
 					"processor": "markdown-exit",
 					"count": 5000,
-					"peakRssKB": 39388
+					"peakRssKB": 39324
 				},
 				{
 					"processor": "marked",
 					"count": 5000,
-					"peakRssKB": 28512
+					"peakRssKB": 29628
 				},
 				{
 					"processor": "comark",
 					"count": 5000,
-					"peakRssKB": 70780
+					"peakRssKB": 70508
 				}
 			]
 		}
