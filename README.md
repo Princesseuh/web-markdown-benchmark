@@ -106,7 +106,7 @@ _Peak resident memory growth over 5,000 consecutive renders of the medium fixtur
 
 ### CI · GitHub Actions
 
-_Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz, Node v24.16.0, 2026-06-19._
+_AMD EPYC 7763, Node v24.17.0, 2026-07-01._
 
 #### Markdown → HTML
 
@@ -117,12 +117,12 @@ _Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz, Node v24.16.0, 2026-06-19._
 
 | Parser        | simple<br>(5000×, ms) | medium<br>(5000×, ms) | GFM<br>(5000×, ms) | large 50×<br>(100×, ms) |
 | ------------- | --------------------: | --------------------: | -----------------: | ----------------------: |
-| satteri       |                    75 |                   618 |              1,340 |                     682 |
-| marked        |                   136 |                 2,317 |              2,978 |                   2,499 |
-| markdown-exit |                   112 |                 2,436 |              3,570 |                   2,566 |
-| markdown-it   |                   114 |                 2,689 |              3,979 |                   2,841 |
-| comark        |                   344 |                 4,270 |              9,603 |                   4,395 |
-| remark        |                 2,133 |                32,223 |             53,775 |                  40,556 |
+| satteri       |                    79 |                   630 |              1,274 |                     619 |
+| markdown-exit |                   138 |                 2,563 |              3,803 |                   2,498 |
+| marked        |                   172 |                 2,654 |              3,457 |                   2,680 |
+| markdown-it   |                   157 |                 2,785 |              4,217 |                   2,835 |
+| comark        |                   419 |                 4,295 |              9,372 |                   4,204 |
+| remark        |                 2,293 |                32,981 |             53,399 |                  41,623 |
 
 </details>
 
@@ -135,8 +135,8 @@ _Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz, Node v24.16.0, 2026-06-19._
 
 | Scenario                                     | satteri (ms) | remark (ms) |
 | -------------------------------------------- | -----------: | ----------: |
-| MDAST plugin (heading depth + 1)             |          768 |      35,321 |
-| MDAST + unfiltered HAST plugins (worst case) |        4,385 |      37,411 |
+| MDAST plugin (heading depth + 1)             |          808 |      35,913 |
+| MDAST + unfiltered HAST plugins (worst case) |        3,806 |      38,278 |
 
 </details>
 
@@ -149,12 +149,12 @@ _Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz, Node v24.16.0, 2026-06-19._
 
 | Scenario                                            | Renders | satteri (ms) | @mdx-js/mdx (ms) |
 | --------------------------------------------------- | ------: | -----------: | ---------------: |
-| MDX → JS                                            |   5000× |          674 |           18,889 |
-| MDX + MDAST plugin (heading depth + 1)              |   5000× |          834 |           19,341 |
-| MDX + HAST plugin (count elements + uppercase text) |   5000× |        2,104 |           20,141 |
-| MDX + both MDAST & HAST plugins                     |   5000× |        2,789 |           20,808 |
-| large MDX → JS (50× document)                       |    100× |          416 |           17,776 |
-| large MDX + both plugins (50× document)             |    100× |        2,183 |           20,218 |
+| MDX → JS                                            |   5000× |          765 |           19,472 |
+| MDX + MDAST plugin (heading depth + 1)              |   5000× |          947 |           19,626 |
+| MDX + HAST plugin (count elements + uppercase text) |   5000× |        2,045 |           20,714 |
+| MDX + both MDAST & HAST plugins                     |   5000× |        2,620 |           21,190 |
+| large MDX → JS (50× document)                       |    100× |          439 |           19,137 |
+| large MDX + both plugins (50× document)             |    100× |        1,977 |           21,189 |
 
 </details>
 
@@ -169,12 +169,12 @@ _Peak resident memory growth over 5,000 consecutive renders of the medium fixtur
 
 | Parser        | peak RSS (MB) |
 | ------------- | ------------: |
-| satteri       |           6.9 |
-| marked        |          28.9 |
-| markdown-it   |          36.9 |
-| markdown-exit |          38.4 |
-| comark        |          68.9 |
-| remark        |         122.3 |
+| satteri       |           6.7 |
+| marked        |          28.7 |
+| markdown-it   |          35.3 |
+| markdown-exit |          38.2 |
+| comark        |          69.7 |
+| remark        |         123.7 |
 
 </details>
 
