@@ -9,26 +9,26 @@
 <text x="20" y="33" class="heading">Peak RSS over 5,000× medium (MB)</text>
 <text x="106" y="62" class="label" text-anchor="end">satteri</text>
 <rect x="116" y="50" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="50" width="34.5" height="16" rx="3" fill="#2f6feb"/>
-<text x="652" y="62" class="value">5.0 MB</text>
+<rect x="116" y="50" width="36.1" height="16" rx="3" fill="#2f6feb"/>
+<text x="652" y="62" class="value">5.1 MB</text>
 <text x="106" y="90" class="label" text-anchor="end">markdown-it</text>
 <rect x="116" y="78" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="78" width="265.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="90" class="value">38.6 MB</text>
+<rect x="116" y="78" width="274.3" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="90" class="value">38.8 MB</text>
 <text x="106" y="118" class="label" text-anchor="end">markdown-exit</text>
 <rect x="116" y="106" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="106" width="268.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="118" class="value">39.0 MB</text>
+<rect x="116" y="106" width="278.5" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="118" class="value">39.4 MB</text>
 <text x="106" y="146" class="label" text-anchor="end">marked</text>
 <rect x="116" y="134" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="134" width="319.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="146" class="value">46.5 MB</text>
+<rect x="116" y="134" width="326.7" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="146" class="value">46.2 MB</text>
 <text x="106" y="174" class="label" text-anchor="end">comark</text>
 <rect x="116" y="162" width="528" height="16" rx="3" class="track"/>
-<rect x="116" y="162" width="471.3" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="174" class="value">68.7 MB</text>
+<rect x="116" y="162" width="492.1" height="16" rx="3" fill="#9aa7b8"/>
+<text x="652" y="174" class="value">69.6 MB</text>
 <text x="106" y="202" class="label" text-anchor="end">remark</text>
 <rect x="116" y="190" width="528" height="16" rx="3" class="track"/>
 <rect x="116" y="190" width="528.0" height="16" rx="3" fill="#9aa7b8"/>
-<text x="652" y="202" class="value">76.9 MB</text>
+<text x="652" y="202" class="value">74.7 MB</text>
 </svg>
