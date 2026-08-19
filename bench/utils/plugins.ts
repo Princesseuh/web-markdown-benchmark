@@ -39,6 +39,8 @@ export const satteriMdastAllPlugin = defineMdastPlugin({
   listItem() {},
   image() {},
   paragraph() {},
+  text() {},
+  inlineCode() {},
 });
 
 // Factory form: satteri calls it once per compile, so `count` resets per

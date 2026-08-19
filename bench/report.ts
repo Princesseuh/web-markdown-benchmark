@@ -53,7 +53,15 @@ const readmeUrl = new URL("../README.md", import.meta.url);
 const measureMemoryUrl = new URL("measure-memory.ts", import.meta.url);
 
 // In display order.
-const benchmarkedPackages = ["satteri", "remark", "markdown-it", "marked", "comark", "@mdx-js/mdx"];
+const benchmarkedPackages = [
+  "satteri",
+  "remark",
+  "markdown-it",
+  "markdown-exit",
+  "marked",
+  "comark",
+  "@mdx-js/mdx",
+];
 
 function loadResultsFile(): ResultsFile {
   if (!existsSync(resultsUrl)) return { primary: "", environments: {} };
@@ -212,10 +220,10 @@ function panel(title: string, rows: BenchResult[]): ChartPanel {
     title,
     bars: [...rows]
       .sort((a, b) => a.ms - b.ms)
-      .map((row) => ({
+      .map((row, index) => ({
         label: row.processor,
         value: row.ms,
-        highlight: row.processor === "satteri",
+        highlight: index === 0,
       })),
   };
 }
@@ -226,10 +234,10 @@ function memoryPanel(memory: MemoryResult[]): ChartPanel {
     unit: "MB",
     bars: [...memory]
       .sort((a, b) => a.peakRssKB - b.peakRssKB)
-      .map((row) => ({
+      .map((row, index) => ({
         label: row.processor,
         value: row.peakRssKB / 1024,
-        highlight: row.processor === "satteri",
+        highlight: index === 0,
       })),
   };
 }
