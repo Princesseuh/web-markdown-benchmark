@@ -8,7 +8,6 @@
 import { markdownToHtml, defineMdastPlugin, defineHastPlugin } from "satteri";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
-import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import { visit } from "unist-util-visit";
@@ -16,6 +15,8 @@ import type { Root as MdastRoot } from "mdast";
 import type { Root as HastRoot } from "hast";
 import { deeper } from "./heading-depth.ts";
 import { satteriFeatures } from "./satteri-options.ts";
+
+const commonMarkFeatures = satteriFeatures(false);
 
 export const satteriHeadingPlugin = defineMdastPlugin({
   name: "heading-transform",
@@ -90,14 +91,12 @@ export interface MarkdownPluginScenario {
 
 const remarkHeadingProcessor = unified()
   .use(remarkParse)
-  .use(remarkGfm)
   .use(remarkHeadingPlugin)
   .use(remarkRehype)
   .use(rehypeStringify);
 
 const remarkWorstCaseProcessor = unified()
   .use(remarkParse)
-  .use(remarkGfm)
   .use(remarkMdastAllPlugin)
   .use(remarkRehype)
   .use(remarkHastAllPlugin)
@@ -108,7 +107,7 @@ export const markdownPluginScenarios: MarkdownPluginScenario[] = [
     name: "MDAST plugin (heading depth + 1)",
     satteri: (source) =>
       markdownToHtml(source, {
-        features: satteriFeatures,
+        features: commonMarkFeatures,
         mdastPlugins: [satteriHeadingPlugin],
       }).html,
     remark: async (source) => String(await remarkHeadingProcessor.process(source)),
@@ -117,7 +116,7 @@ export const markdownPluginScenarios: MarkdownPluginScenario[] = [
     name: "MDAST + unfiltered HAST plugins (worst case)",
     satteri: (source) =>
       markdownToHtml(source, {
-        features: satteriFeatures,
+        features: commonMarkFeatures,
         mdastPlugins: [satteriMdastAllPlugin],
         hastPlugins: [satteriHastAllPlugin],
       }).html,

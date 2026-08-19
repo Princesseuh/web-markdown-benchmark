@@ -28,7 +28,7 @@ if (!processor) {
   process.exit(1);
 }
 
-const render = await processor.load();
+const render = await processor.load(false);
 const parse = () => render(medium);
 
 interface VmSample {

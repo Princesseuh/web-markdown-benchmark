@@ -1,7 +1,6 @@
 import { bench, describe } from "vitest";
 import { mdxToJs } from "satteri";
 import { compileSync } from "@mdx-js/mdx";
-import remarkGfm from "remark-gfm";
 import { mdx, largeMdx } from "./utils/fixtures.ts";
 import { satteriFeatures } from "./utils/satteri-options.ts";
 import {
@@ -13,11 +12,7 @@ import {
   remarkHastAllPlugin,
 } from "./utils/plugins.ts";
 
-const satteriOptions = { features: satteriFeatures };
-
-// GFM enabled on @mdx-js/mdx so it handles the same syntax as Sätteri (see
-// ./parity.ts).
-const mdxBaseRemarkPlugins = [remarkGfm];
+const satteriOptions = { features: satteriFeatures(false) };
 
 interface MdxPluginScenario {
   name: string;
@@ -31,7 +26,7 @@ const pluginScenarios: MdxPluginScenario[] = [
     satteri: () => mdxToJs(mdx, { ...satteriOptions, mdastPlugins: [satteriHeadingPlugin] }),
     mdxJs: () =>
       compileSync(mdx, {
-        remarkPlugins: [...mdxBaseRemarkPlugins, remarkHeadingPlugin],
+        remarkPlugins: [remarkHeadingPlugin],
       }),
   },
   {
@@ -39,7 +34,6 @@ const pluginScenarios: MdxPluginScenario[] = [
     satteri: () => mdxToJs(mdx, { ...satteriOptions, hastPlugins: [satteriHastAllPlugin] }),
     mdxJs: () =>
       compileSync(mdx, {
-        remarkPlugins: mdxBaseRemarkPlugins,
         rehypePlugins: [remarkHastAllPlugin],
       }),
   },
@@ -53,7 +47,7 @@ const pluginScenarios: MdxPluginScenario[] = [
       }),
     mdxJs: () =>
       compileSync(mdx, {
-        remarkPlugins: [...mdxBaseRemarkPlugins, remarkMdastAllPlugin],
+        remarkPlugins: [remarkMdastAllPlugin],
         rehypePlugins: [remarkHastAllPlugin],
       }),
   },
@@ -64,7 +58,7 @@ describe("MDX → JS", () => {
     mdxToJs(mdx, satteriOptions);
   });
   bench("@mdx-js/mdx", () => {
-    compileSync(mdx, { remarkPlugins: mdxBaseRemarkPlugins });
+    compileSync(mdx);
   });
 });
 
@@ -89,7 +83,7 @@ describe("large MDX → JS (50× document)", () => {
   bench(
     "@mdx-js/mdx",
     () => {
-      compileSync(largeMdx, { remarkPlugins: mdxBaseRemarkPlugins });
+      compileSync(largeMdx);
     },
     slowBench,
   );
@@ -107,7 +101,7 @@ describe("large MDX + both plugins (50× document)", () => {
     "@mdx-js/mdx",
     () => {
       compileSync(largeMdx, {
-        remarkPlugins: [...mdxBaseRemarkPlugins, remarkMdastAllPlugin],
+        remarkPlugins: [remarkMdastAllPlugin],
         rehypePlugins: [remarkHastAllPlugin],
       });
     },

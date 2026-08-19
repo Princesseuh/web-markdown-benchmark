@@ -11,6 +11,8 @@ export interface Fixture {
   /** Heading used for the describe/test block, e.g. "medium markdown". */
   name: string;
   source: string;
+  /** Whether the processors parse this fixture in GFM mode. Only the GFM fixture contains GFM syntax. */
+  gfm: boolean;
 }
 
 const simple = read("simple.md");
@@ -41,8 +43,8 @@ export const largeMdx = scaleMdx(mdx, 50);
 
 /** The fixtures swept by the markdown → HTML benchmark. */
 export const markdownFixtures: Fixture[] = [
-  { name: "simple markdown", source: simple },
-  { name: "medium markdown", source: medium },
-  { name: "GFM markdown", source: gfm },
-  { name: "large document (50× medium)", source: largeMarkdown },
+  { name: "simple markdown", source: simple, gfm: false },
+  { name: "medium markdown", source: medium, gfm: false },
+  { name: "GFM markdown", source: gfm, gfm: true },
+  { name: "large document (50× medium)", source: largeMarkdown, gfm: false },
 ];

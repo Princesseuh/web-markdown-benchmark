@@ -7,7 +7,6 @@
 import { performance } from "node:perf_hooks";
 import { mdxToJs } from "satteri";
 import { compileSync } from "@mdx-js/mdx";
-import remarkGfm from "remark-gfm";
 import { markdownProcessors } from "./processors.ts";
 import {
   markdownPluginScenarios,
@@ -61,16 +60,23 @@ export async function runAllBenchmarks(onProgress: ProgressFn = () => {}): Promi
     onProgress(`  ${processor.padEnd(12)} ${ms.toFixed(1)} ms`);
   }
 
-  const renderers = await Promise.all(
-    markdownProcessors.map(async (processor) => ({
-      name: processor.name,
-      render: await processor.load(),
-    })),
-  );
-  for (const { name, source } of markdownFixtures) {
+  const renderersFor = (gfm: boolean) =>
+    Promise.all(
+      (gfm ? markdownProcessors.filter((p) => p.supportsGfm) : markdownProcessors).map(
+        async (processor) => ({
+          name: processor.name,
+          render: await processor.load(gfm),
+        }),
+      ),
+    );
+  const [commonMarkRenderers, gfmRenderers] = await Promise.all([
+    renderersFor(false),
+    renderersFor(true),
+  ]);
+  for (const { name, source, gfm } of markdownFixtures) {
     const count = name.startsWith("large") ? LARGE : SMALL;
     onProgress(`\n${name} (${count}×)`);
-    for (const { name: processor, render } of renderers) {
+    for (const { name: processor, render } of gfm ? gfmRenderers : commonMarkRenderers) {
       await record("md-html", name, processor, count, () => render(source));
     }
   }
@@ -81,15 +87,14 @@ export async function runAllBenchmarks(onProgress: ProgressFn = () => {}): Promi
     await record("md-plugin", scenario.name, "remark", SMALL, () => scenario.remark(medium));
   }
 
-  const satteriOptions = { features: satteriFeatures };
-  const mdxBaseRemarkPlugins = [remarkGfm];
+  const satteriOptions = { features: satteriFeatures(false) };
 
   const mdxScenarios = [
     {
       name: "MDX → JS",
       count: SMALL,
       satteri: () => mdxToJs(mdx, satteriOptions),
-      mdxJs: () => compileSync(mdx, { remarkPlugins: mdxBaseRemarkPlugins }),
+      mdxJs: () => compileSync(mdx),
     },
     {
       name: "MDX + MDAST plugin (heading depth + 1)",
@@ -101,7 +106,7 @@ export async function runAllBenchmarks(onProgress: ProgressFn = () => {}): Promi
         }),
       mdxJs: () =>
         compileSync(mdx, {
-          remarkPlugins: [...mdxBaseRemarkPlugins, remarkHeadingPlugin],
+          remarkPlugins: [remarkHeadingPlugin],
         }),
     },
     {
@@ -114,7 +119,6 @@ export async function runAllBenchmarks(onProgress: ProgressFn = () => {}): Promi
         }),
       mdxJs: () =>
         compileSync(mdx, {
-          remarkPlugins: mdxBaseRemarkPlugins,
           rehypePlugins: [remarkHastAllPlugin],
         }),
     },
@@ -129,7 +133,7 @@ export async function runAllBenchmarks(onProgress: ProgressFn = () => {}): Promi
         }),
       mdxJs: () =>
         compileSync(mdx, {
-          remarkPlugins: [...mdxBaseRemarkPlugins, remarkMdastAllPlugin],
+          remarkPlugins: [remarkMdastAllPlugin],
           rehypePlugins: [remarkHastAllPlugin],
         }),
     },
@@ -137,7 +141,7 @@ export async function runAllBenchmarks(onProgress: ProgressFn = () => {}): Promi
       name: "large MDX → JS (50× document)",
       count: LARGE,
       satteri: () => mdxToJs(largeMdx, satteriOptions),
-      mdxJs: () => compileSync(largeMdx, { remarkPlugins: mdxBaseRemarkPlugins }),
+      mdxJs: () => compileSync(largeMdx),
     },
     {
       name: "large MDX + both plugins (50× document)",
@@ -150,7 +154,7 @@ export async function runAllBenchmarks(onProgress: ProgressFn = () => {}): Promi
         }),
       mdxJs: () =>
         compileSync(largeMdx, {
-          remarkPlugins: [...mdxBaseRemarkPlugins, remarkMdastAllPlugin],
+          remarkPlugins: [remarkMdastAllPlugin],
           rehypePlugins: [remarkHastAllPlugin],
         }),
     },

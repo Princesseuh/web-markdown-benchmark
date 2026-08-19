@@ -4,17 +4,25 @@ Benchmarks for the Markdown parsers commonly used in web development.
 
 ## Contenders
 
-- [remark + rehype](https://github.com/remarkjs/remark)
+- [remark + rehype](https://github.com/remarkjs/remark)⁵
   - [@mdx-js/mdx](https://github.com/mdx-js/mdx) for MDX
 - [Sätteri](https://github.com/bruits/satteri)¹
-- [markdown-it](https://github.com/markdown-it/markdown-it)
-- [markdown-exit](https://github.com/serkodev/markdown-exit)
-- [marked](https://github.com/markedjs/marked)
-- [comark](https://github.com/comarkdown/comark)²
+- [markdown-it](https://github.com/markdown-it/markdown-it)³⁵
+- [markdown-exit](https://github.com/serkodev/markdown-exit)³⁵
+- [marked](https://github.com/markedjs/marked)⁴
+- [comark](https://github.com/comarkdown/comark)²⁵
 
 ¹I ([Princesseuh](https://github.com/princesseuh)) am the author of Sätteri.
 
-²comark generates a slightly different HTML from the other libraries, and some of its built-in features (e.g. frontmatter) cannot be turned off.
+²comark generates a slightly different HTML from the other libraries.
+
+³markdown-it and markdown-exit do not support GFM, although they can be configured to somewhat emulate it (tables, strikethrough, autolinks, etc are possible, but not in a GFM-compliant way)
+
+⁴marked supports the spec version of GFM, unlike remark, sätteri and comark which support the GitHub version of it. Notably, this means that marked's GFM implementation does not support footnotes.
+
+⁵Every parser is configured to pass raw HTML through instead of escaping or dropping it: `html: true` for markdown-it and markdown-exit, `allowDangerousHtml` for remark, and the `html` plugin for comark. Sätteri and marked already do it by default. The fixtures contain no raw HTML, so this does not move the timings.
+
+Comark's handling of HTML works differently from other parser because enabling HTML support for it implicitely means enabling parsing said HTML, whereas other pipelines just pass through the HTML as-is, optionally or not parsing it (ex: Sätteri with `features.rawHtml` or `remark` with `rehype-raw`)
 
 ## Results
 
@@ -24,15 +32,15 @@ Benchmarks for the Markdown parsers commonly used in web development.
 
 Wall-clock time for N consecutive renders after warmup. Lower is better.
 
-Every processor is configured for CommonMark + GFM.
+Every processor is solely configured for CommonMark. GFM support is enabled only for the GFM benchmark.
 
 Fixtures: [simple](./bench/fixtures/simple.md) `0.2 KB`, [medium](./bench/fixtures/medium.md) `10 KB`, [GFM](./bench/fixtures/gfm.md) `8 KB`, large `≈500 KB` (medium ×50).
 
-Package versions: `satteri@0.9.0`, `remark@15.0.1`, `markdown-it@14.2.0`, `marked@18.0.5`, `comark@0.4.0`, `@mdx-js/mdx@3.1.1`.
+Package versions: `satteri@0.10.3`, `remark@15.0.1`, `markdown-it@15.0.0`, `marked@18.0.10`, `comark@0.6.2`, `@mdx-js/mdx@3.1.1`.
 
 ### AMD Ryzen 7 9800X3D
 
-_Node v26.2.0, 2026-06-19._
+_Node v26.7.0, 2026-08-19._
 
 #### Markdown → HTML
 
@@ -43,12 +51,12 @@ _Node v26.2.0, 2026-06-19._
 
 | Parser        | simple<br>(5000×, ms) | medium<br>(5000×, ms) | GFM<br>(5000×, ms) | large 50×<br>(100×, ms) |
 | ------------- | --------------------: | --------------------: | -----------------: | ----------------------: |
-| satteri       |                    32 |                   237 |                449 |                     223 |
-| markdown-exit |                    39 |                   916 |              1,300 |                   1,014 |
-| markdown-it   |                    42 |                 1,005 |              1,410 |                   1,061 |
-| marked        |                    60 |                 1,158 |              1,416 |                   1,265 |
-| comark        |                   129 |                 1,687 |              3,986 |                   1,817 |
-| remark        |                   890 |                14,148 |             24,224 |                  17,666 |
+| satteri       |                    12 |                   119 |                257 |                     121 |
+| markdown-exit |                    35 |                   586 |                  — |                     662 |
+| marked        |                    59 |                 1,026 |              1,604 |                   1,167 |
+| markdown-it   |                    83 |                 1,050 |                  — |                   1,126 |
+| comark        |                   103 |                 1,182 |              3,874 |                   1,328 |
+| remark        |                   567 |                 6,800 |             24,328 |                   9,545 |
 
 </details>
 
@@ -61,8 +69,8 @@ _Node v26.2.0, 2026-06-19._
 
 | Scenario                                     | satteri (ms) | remark (ms) |
 | -------------------------------------------- | -----------: | ----------: |
-| MDAST plugin (heading depth + 1)             |          287 |      15,671 |
-| MDAST + unfiltered HAST plugins (worst case) |        1,442 |      16,975 |
+| MDAST plugin (heading depth + 1)             |          163 |       7,969 |
+| MDAST + unfiltered HAST plugins (worst case) |          982 |       9,219 |
 
 </details>
 
@@ -75,12 +83,12 @@ _Node v26.2.0, 2026-06-19._
 
 | Scenario                                            | Renders | satteri (ms) | @mdx-js/mdx (ms) |
 | --------------------------------------------------- | ------: | -----------: | ---------------: |
-| MDX → JS                                            |   5000× |          226 |            9,009 |
-| MDX + MDAST plugin (heading depth + 1)              |   5000× |          277 |            9,248 |
-| MDX + HAST plugin (count elements + uppercase text) |   5000× |          700 |            9,737 |
-| MDX + both MDAST & HAST plugins                     |   5000× |          881 |           10,018 |
-| large MDX → JS (50× document)                       |    100× |          190 |            7,554 |
-| large MDX + both plugins (50× document)             |    100× |          782 |            8,959 |
+| MDX → JS                                            |   5000× |          155 |            7,179 |
+| MDX + MDAST plugin (heading depth + 1)              |   5000× |          213 |            7,417 |
+| MDX + HAST plugin (count elements + uppercase text) |   5000× |          461 |            7,823 |
+| MDX + both MDAST & HAST plugins                     |   5000× |          636 |            8,108 |
+| large MDX → JS (50× document)                       |    100× |          151 |            6,001 |
+| large MDX + both plugins (50× document)             |    100× |          538 |            7,364 |
 
 </details>
 
@@ -95,12 +103,12 @@ _Peak resident memory growth over 5,000 consecutive renders of the medium fixtur
 
 | Parser        | peak RSS (MB) |
 | ------------- | ------------: |
-| satteri       |           6.2 |
-| marked        |          28.7 |
-| markdown-it   |          38.7 |
-| markdown-exit |          40.3 |
-| comark        |          69.3 |
-| remark        |         147.9 |
+| satteri       |           5.0 |
+| markdown-it   |          38.6 |
+| markdown-exit |          39.0 |
+| marked        |          46.5 |
+| comark        |          68.7 |
+| remark        |          76.9 |
 
 </details>
 
@@ -190,13 +198,13 @@ Transitive dependency count and total on-disk size of each library's basic markd
 
 | Parser          | deps | install size |
 | --------------- | ---: | -----------: |
-| `marked`        |    0 |       441 KB |
-| `markdown-exit` |    7 |       698 KB |
-| `markdown-it`   |    6 |      1.43 MB |
-| `remark`        |   59 |      2.09 MB |
-| `comark`        |   16 |      2.71 MB |
-| `satteri`       |    6 |      3.19 MB |
-| `@mdx-js/mdx`   |  111 |      4.36 MB |
+| `marked`        |    0 |       459 KB |
+| `markdown-exit` |    7 |       699 KB |
+| `remark`        |   59 |      2.12 MB |
+| `markdown-it`   |    6 |      2.50 MB |
+| `comark`        |   16 |      3.46 MB |
+| `satteri`       |    6 |      4.40 MB |
+| `@mdx-js/mdx`   |  111 |      4.41 MB |
 
 **Note:** Certain libraries inherently require multiple packages to provide Markdown to HTML. (ex: remark)
 

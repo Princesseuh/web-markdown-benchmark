@@ -4,11 +4,16 @@
 // own library, so a consumer that needs only one processor (see
 // ./measure-memory.ts) never pulls the others into memory.
 //
-// Every processor is configured for CommonMark + GFM so they do equivalent
-// work. marked/Sätteri/comark enable GFM by default; markdown-it and
-// markdown-exit need `linkify: true` for GFM bare-URL autolinking; remark
-// gets remark-gfm added explicitly (see ./parity.ts).
+// `load(gfm)` builds a CommonMark-only or a CommonMark + GFM processor, so a
+// fixture is parsed in GFM mode only when it contains GFM syntax (see
+// ./fixtures.ts). marked/Sätteri cover GFM natively; markdown-it and
+// markdown-exit need `linkify: true` for bare-URL autolinking; remark gets
+// remark-gfm; comark registers its GFM plugins explicitly so frontmatter and
+// alerts, which nobody else here parses, stay off (see ./parity.ts).
+//
+// Raw HTML is passed through everywhere rather than escaped or dropped, hence `allowDangerousHtml`.
 
+import type MarkdownIt from "markdown-it";
 import { satteriFeatures } from "./satteri-options.ts";
 
 /** A configured markdown → HTML conversion. Sync or async depending on the library. */
@@ -16,66 +21,92 @@ export type RenderMarkdown = (source: string) => string | Promise<string>;
 
 export interface MarkdownProcessor {
   name: string;
-  load: () => Promise<RenderMarkdown>;
+  /** Libraries missing GFM syntax sit out the GFM fixture instead of posting a time for work they skip. */
+  supportsGfm: boolean;
+  load: (gfm: boolean) => Promise<RenderMarkdown>;
 }
+
+// comark always enables tables and strikethrough on its markdown-it core, so only a plugin can reach in and undo it.
+const comarkWithoutGfm = {
+  name: "no-gfm",
+  markdownItPlugins: [
+    (md: InstanceType<typeof MarkdownIt>) => void md.disable(["table", "strikethrough"]),
+  ],
+};
 
 export const markdownProcessors: MarkdownProcessor[] = [
   {
     name: "satteri",
-    async load() {
+    supportsGfm: true,
+    async load(gfm) {
       const { markdownToHtml } = await import("satteri");
-      return (source) => markdownToHtml(source, { features: satteriFeatures }).html;
+      const features = satteriFeatures(gfm);
+      return (source) => markdownToHtml(source, { features }).html;
     },
   },
   {
     name: "remark",
-    async load() {
+    supportsGfm: true,
+    async load(gfm) {
       const { unified } = await import("unified");
       const { default: remarkParse } = await import("remark-parse");
       const { default: remarkGfm } = await import("remark-gfm");
       const { default: remarkRehype } = await import("remark-rehype");
       const { default: rehypeStringify } = await import("rehype-stringify");
-      const processor = unified()
-        .use(remarkParse)
-        .use(remarkGfm)
-        .use(remarkRehype)
-        .use(rehypeStringify);
+      const parser = unified().use(remarkParse);
+      const processor = (gfm ? parser.use(remarkGfm) : parser)
+        .use(remarkRehype, { allowDangerousHtml: true })
+        .use(rehypeStringify, { allowDangerousHtml: true });
       return async (source) => String(await processor.process(source));
     },
   },
   {
     name: "markdown-it",
-    async load() {
+    supportsGfm: false,
+    async load(gfm) {
       const { default: MarkdownIt } = await import("markdown-it");
-      const md = new MarkdownIt({ linkify: true });
+      const md = new MarkdownIt({ linkify: gfm, html: true });
+      if (!gfm) md.disable(["table", "strikethrough"]);
       return (source) => md.render(source);
     },
   },
   {
     name: "markdown-exit",
-    async load() {
+    supportsGfm: false,
+    async load(gfm) {
       const { createMarkdownExit } = await import("markdown-exit");
-      const md = createMarkdownExit({ linkify: true });
+      const md = createMarkdownExit({ linkify: gfm, html: true });
+      if (!gfm) md.disable(["table", "strikethrough"]);
       return (source) => md.render(source);
     },
   },
   {
     name: "marked",
-    async load() {
-      const { marked } = await import("marked");
-      marked.use({ gfm: true });
-      return (source) => marked.parse(source);
+    supportsGfm: true,
+    async load(gfm) {
+      const { Marked } = await import("marked");
+      const md = new Marked({ gfm });
+      return (source) => md.parse(source);
     },
   },
   {
     name: "comark",
-    async load() {
-      const { createParse } = await import("comark");
+    supportsGfm: true,
+    async load(gfm) {
+      const { createMarkdownParser } = await import("comark");
       const { render } = await import("comark/render");
-      const parse = createParse({
+      const { default: taskList } = await import("comark/plugins/task-list");
+      const { default: components } = await import("comark/plugins/components");
+      const { default: footnotes } = await import("comark/plugins/footnotes");
+      const { default: html } = await import("comark/plugins/html");
+      // comark's footnotes plugin is a no-op without `components`, which is what parses the `[^ref]` brackets.
+      const gfmPlugins = gfm ? [taskList(), components(), footnotes()] : [comarkWithoutGfm];
+      const parse = createMarkdownParser({
+        registerDefaultPlugins: false,
+        plugins: [...gfmPlugins, html()],
+        linkify: gfm,
         autoClose: false,
-        html: false,
-        autoUnwrap: false,
+        headingIds: false,
       });
       return async (source) => render(await parse(source), { format: "text/html" });
     },

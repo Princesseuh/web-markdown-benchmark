@@ -5,12 +5,20 @@ import { markdownPluginScenarios } from "./utils/plugins.ts";
 
 // Resolve every processor once up front so the bench bodies time only the
 // conversion, not the library import.
-const renderers = await Promise.all(
-  markdownProcessors.map(async (processor) => ({
-    name: processor.name,
-    render: await processor.load(),
-  })),
-);
+function renderersFor(gfm: boolean) {
+  const processors = gfm ? markdownProcessors.filter((p) => p.supportsGfm) : markdownProcessors;
+  return Promise.all(
+    processors.map(async (processor) => ({
+      name: processor.name,
+      render: await processor.load(gfm),
+    })),
+  );
+}
+
+const [commonMarkRenderers, gfmRenderers] = await Promise.all([
+  renderersFor(false),
+  renderersFor(true),
+]);
 
 // Returns the promise for async processors so vitest awaits and times it; sync
 // processors return nothing and are measured without async overhead.
@@ -19,9 +27,9 @@ function run(render: RenderMarkdown, source: string): void | Promise<void> {
   if (result instanceof Promise) return result.then(() => {});
 }
 
-for (const { name, source } of markdownFixtures) {
+for (const { name, source, gfm } of markdownFixtures) {
   describe(`${name} → HTML`, () => {
-    for (const { name: processor, render } of renderers) {
+    for (const { name: processor, render } of gfm ? gfmRenderers : commonMarkRenderers) {
       bench(processor, () => run(render, source));
     }
   });

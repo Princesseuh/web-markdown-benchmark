@@ -1,8 +1,10 @@
 import type { Features } from "satteri";
 
-export const satteriFeatures: Features = {
-  gfm: true,
-  frontmatter: false,
-  math: false,
-  headingAttributes: false,
-};
+export function satteriFeatures(gfm: boolean): Features {
+  return {
+    gfm,
+    frontmatter: false,
+    math: false,
+    headingAttributes: false,
+  };
+}
