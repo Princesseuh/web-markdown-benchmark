@@ -114,7 +114,7 @@ _Peak resident memory growth over 5,000 consecutive renders of the medium fixtur
 
 ### CI · GitHub Actions
 
-_AMD EPYC 7763, Node v24.19.0, 2026-08-19._
+_AMD EPYC 9V74, Node v24.19.0, 2026-09-01._
 
 #### Markdown → HTML
 
@@ -125,12 +125,12 @@ _AMD EPYC 7763, Node v24.19.0, 2026-08-19._
 
 | Parser        | simple<br>(5000×, ms) | medium<br>(5000×, ms) | GFM<br>(5000×, ms) | large 50×<br>(100×, ms) |
 | ------------- | --------------------: | --------------------: | -----------------: | ----------------------: |
-| satteri       |                    28 |                   309 |                712 |                     385 |
-| markdown-exit |                   114 |                 1,348 |                  — |                   1,404 |
-| marked        |                   168 |                 2,327 |              3,806 |                   2,534 |
-| markdown-it   |                   205 |                 2,458 |                  — |                   2,462 |
-| comark        |                   291 |                 2,699 |              9,421 |                   2,922 |
-| remark        |                 1,545 |                15,274 |             51,653 |                  24,038 |
+| satteri       |                    35 |                   315 |                662 |                     400 |
+| markdown-exit |                   109 |                 1,166 |                  — |                   1,294 |
+| marked        |                   145 |                 2,107 |              3,545 |                   2,309 |
+| markdown-it   |                   214 |                 2,249 |                  — |                   2,334 |
+| comark        |                   241 |                 2,447 |              9,445 |                   2,846 |
+| remark        |                 1,541 |                15,801 |             53,357 |                  25,780 |
 
 </details>
 
@@ -143,8 +143,8 @@ _AMD EPYC 7763, Node v24.19.0, 2026-08-19._
 
 | Scenario                                     | satteri (ms) | remark (ms) |
 | -------------------------------------------- | -----------: | ----------: |
-| MDAST plugin (heading depth + 1)             |          461 |      17,325 |
-| MDAST + unfiltered HAST plugins (worst case) |        2,640 |      19,413 |
+| MDAST plugin (heading depth + 1)             |          432 |      17,925 |
+| MDAST + unfiltered HAST plugins (worst case) |        2,555 |      20,255 |
 
 </details>
 
@@ -157,12 +157,12 @@ _AMD EPYC 7763, Node v24.19.0, 2026-08-19._
 
 | Scenario                                            | Renders | satteri (ms) | @mdx-js/mdx (ms) |
 | --------------------------------------------------- | ------: | -----------: | ---------------: |
-| MDX → JS                                            |   5000× |          508 |           14,789 |
-| MDX + MDAST plugin (heading depth + 1)              |   5000× |          742 |           15,094 |
-| MDX + HAST plugin (count elements + uppercase text) |   5000× |        1,336 |           16,372 |
-| MDX + both MDAST & HAST plugins                     |   5000× |        1,846 |           16,713 |
-| large MDX → JS (50× document)                       |    100× |          329 |           14,063 |
-| large MDX + both plugins (50× document)             |    100× |        1,380 |           16,606 |
+| MDX → JS                                            |   5000× |          397 |           15,313 |
+| MDX + MDAST plugin (heading depth + 1)              |   5000× |          626 |           15,172 |
+| MDX + HAST plugin (count elements + uppercase text) |   5000× |        1,318 |           16,151 |
+| MDX + both MDAST & HAST plugins                     |   5000× |        1,824 |           16,581 |
+| large MDX → JS (50× document)                       |    100× |          333 |           14,665 |
+| large MDX + both plugins (50× document)             |    100× |        1,413 |           17,203 |
 
 </details>
 
@@ -177,12 +177,12 @@ _Peak resident memory growth over 5,000 consecutive renders of the medium fixtur
 
 | Parser        | peak RSS (MB) |
 | ------------- | ------------: |
-| satteri       |           4.8 |
-| markdown-exit |          37.3 |
-| markdown-it   |          37.4 |
-| marked        |          45.2 |
-| comark        |          69.0 |
-| remark        |         138.1 |
+| satteri       |           5.1 |
+| markdown-it   |          37.9 |
+| markdown-exit |          40.4 |
+| marked        |          45.5 |
+| comark        |          66.0 |
+| remark        |         138.4 |
 
 </details>
 

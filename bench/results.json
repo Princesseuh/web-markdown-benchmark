@@ -316,9 +316,9 @@
 			]
 		},
 		"CI · GitHub Actions": {
-			"cpu": "AMD EPYC 7763",
+			"cpu": "AMD EPYC 9V74",
 			"node": "v24.19.0",
-			"generatedAt": "2026-08-19T01:53:00.566Z",
+			"generatedAt": "2026-09-01T04:23:57.036Z",
 			"packages": {
 				"satteri": "0.10.3",
 				"remark": "15.0.1",
@@ -334,298 +334,298 @@
 					"bench": "simple markdown",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 27.556850000000054
+					"ms": 34.852277000000015
 				},
 				{
 					"group": "md-html",
 					"bench": "simple markdown",
 					"processor": "remark",
 					"count": 5000,
-					"ms": 1544.899148
+					"ms": 1540.8609979999999
 				},
 				{
 					"group": "md-html",
 					"bench": "simple markdown",
 					"processor": "markdown-it",
 					"count": 5000,
-					"ms": 204.75490600000012
+					"ms": 213.69665799999984
 				},
 				{
 					"group": "md-html",
 					"bench": "simple markdown",
 					"processor": "markdown-exit",
 					"count": 5000,
-					"ms": 114.21624999999995
+					"ms": 108.65692799999988
 				},
 				{
 					"group": "md-html",
 					"bench": "simple markdown",
 					"processor": "marked",
 					"count": 5000,
-					"ms": 168.18659300000036
+					"ms": 145.08503500000006
 				},
 				{
 					"group": "md-html",
 					"bench": "simple markdown",
 					"processor": "comark",
 					"count": 5000,
-					"ms": 291.414933
+					"ms": 240.81103200000007
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 309.3593740000001
+					"ms": 314.69242699999995
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "remark",
 					"count": 5000,
-					"ms": 15273.591437
+					"ms": 15800.938687999998
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "markdown-it",
 					"count": 5000,
-					"ms": 2458.3494169999976
+					"ms": 2249.4449840000016
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "markdown-exit",
 					"count": 5000,
-					"ms": 1348.4002379999984
+					"ms": 1165.7741080000014
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "marked",
 					"count": 5000,
-					"ms": 2326.8274979999987
+					"ms": 2107.032579999999
 				},
 				{
 					"group": "md-html",
 					"bench": "medium markdown",
 					"processor": "comark",
 					"count": 5000,
-					"ms": 2698.7370850000007
+					"ms": 2446.5933509999995
 				},
 				{
 					"group": "md-html",
 					"bench": "GFM markdown",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 712.4037160000007
+					"ms": 661.6053939999983
 				},
 				{
 					"group": "md-html",
 					"bench": "GFM markdown",
 					"processor": "remark",
 					"count": 5000,
-					"ms": 51652.830484
+					"ms": 53357.48448199999
 				},
 				{
 					"group": "md-html",
 					"bench": "GFM markdown",
 					"processor": "marked",
 					"count": 5000,
-					"ms": 3806.291996
+					"ms": 3545.3086049999984
 				},
 				{
 					"group": "md-html",
 					"bench": "GFM markdown",
 					"processor": "comark",
 					"count": 5000,
-					"ms": 9421.256815
+					"ms": 9445.158664000002
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "satteri",
 					"count": 100,
-					"ms": 385.4175890000042
+					"ms": 399.9302999999927
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "remark",
 					"count": 100,
-					"ms": 24037.77505099999
+					"ms": 25779.747887999998
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "markdown-it",
 					"count": 100,
-					"ms": 2461.5655939999997
+					"ms": 2334.3256430000038
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "markdown-exit",
 					"count": 100,
-					"ms": 1403.9280940000026
+					"ms": 1293.7113439999957
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "marked",
 					"count": 100,
-					"ms": 2533.9134369999956
+					"ms": 2308.605444999994
 				},
 				{
 					"group": "md-html",
 					"bench": "large document (50× medium)",
 					"processor": "comark",
 					"count": 100,
-					"ms": 2922.4823939999915
+					"ms": 2845.713156999991
 				},
 				{
 					"group": "md-plugin",
 					"bench": "MDAST plugin (heading depth + 1)",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 460.8905150000064
+					"ms": 431.8386410000094
 				},
 				{
 					"group": "md-plugin",
 					"bench": "MDAST plugin (heading depth + 1)",
 					"processor": "remark",
 					"count": 5000,
-					"ms": 17325.048404
+					"ms": 17925.146042000008
 				},
 				{
 					"group": "md-plugin",
 					"bench": "MDAST + unfiltered HAST plugins (worst case)",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 2640.14215900001
+					"ms": 2554.6144159999967
 				},
 				{
 					"group": "md-plugin",
 					"bench": "MDAST + unfiltered HAST plugins (worst case)",
 					"processor": "remark",
 					"count": 5000,
-					"ms": 19412.86814799998
+					"ms": 20254.602363000013
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX → JS",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 508.49075299999095
+					"ms": 397.32239200000186
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX → JS",
 					"processor": "@mdx-js/mdx",
 					"count": 5000,
-					"ms": 14789.11209000001
+					"ms": 15313.315884999989
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + MDAST plugin (heading depth + 1)",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 741.9061689999944
+					"ms": 625.8567840000032
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + MDAST plugin (heading depth + 1)",
 					"processor": "@mdx-js/mdx",
 					"count": 5000,
-					"ms": 15094.348783000023
+					"ms": 15172.344616999995
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + HAST plugin (count elements + uppercase text)",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 1335.7098600000027
+					"ms": 1318.2235169999767
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + HAST plugin (count elements + uppercase text)",
 					"processor": "@mdx-js/mdx",
 					"count": 5000,
-					"ms": 16372.115338999982
+					"ms": 16151.451264999982
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + both MDAST & HAST plugins",
 					"processor": "satteri",
 					"count": 5000,
-					"ms": 1845.530286000023
+					"ms": 1823.593854000006
 				},
 				{
 					"group": "mdx",
 					"bench": "MDX + both MDAST & HAST plugins",
 					"processor": "@mdx-js/mdx",
 					"count": 5000,
-					"ms": 16712.814250000025
+					"ms": 16581.181792999996
 				},
 				{
 					"group": "mdx",
 					"bench": "large MDX → JS (50× document)",
 					"processor": "satteri",
 					"count": 100,
-					"ms": 329.33803199999966
+					"ms": 333.44876299999305
 				},
 				{
 					"group": "mdx",
 					"bench": "large MDX → JS (50× document)",
 					"processor": "@mdx-js/mdx",
 					"count": 100,
-					"ms": 14062.579183000023
+					"ms": 14665.40813299999
 				},
 				{
 					"group": "mdx",
 					"bench": "large MDX + both plugins (50× document)",
 					"processor": "satteri",
 					"count": 100,
-					"ms": 1379.6932980000274
+					"ms": 1412.6330699999817
 				},
 				{
 					"group": "mdx",
 					"bench": "large MDX + both plugins (50× document)",
 					"processor": "@mdx-js/mdx",
 					"count": 100,
-					"ms": 16605.889593
+					"ms": 17202.747237000032
 				}
 			],
 			"memory": [
 				{
 					"processor": "satteri",
 					"count": 5000,
-					"peakRssKB": 4868
+					"peakRssKB": 5196
 				},
 				{
 					"processor": "remark",
 					"count": 5000,
-					"peakRssKB": 141368
+					"peakRssKB": 141720
 				},
 				{
 					"processor": "markdown-it",
 					"count": 5000,
-					"peakRssKB": 38260
+					"peakRssKB": 38792
 				},
 				{
 					"processor": "markdown-exit",
 					"count": 5000,
-					"peakRssKB": 38184
+					"peakRssKB": 41396
 				},
 				{
 					"processor": "marked",
 					"count": 5000,
-					"peakRssKB": 46252
+					"peakRssKB": 46592
 				},
 				{
 					"processor": "comark",
 					"count": 5000,
-					"peakRssKB": 70696
+					"peakRssKB": 67604
 				}
 			]
 		}
